@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rubrics",
+  "info": {
+    "name": "rubric",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "TestRubric": {
+      "type": "string"
+    }
+  }
+}

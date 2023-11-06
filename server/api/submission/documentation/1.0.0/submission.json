@@ -658,6 +658,10 @@
           },
           "job_id": {
             "type": "integer"
+          },
+          "submission_time": {
+            "type": "string",
+            "format": "date"
           }
         }
       },
@@ -707,6 +711,10 @@
           },
           "job_id": {
             "type": "integer"
+          },
+          "submission_time": {
+            "type": "string",
+            "format": "date"
           },
           "created_by": {
             "type": "string"

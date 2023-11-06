@@ -53,6 +53,9 @@
     },
     "job_id": {
       "type": "biginteger"
+    },
+    "submission_time": {
+      "type": "date"
     }
   }
 }
