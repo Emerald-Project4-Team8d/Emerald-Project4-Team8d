@@ -82,7 +82,7 @@ export default function RubricModal(props) {
                         onChange={e => setCompilePoints(e.target.value)}
                         value={CompilePoints}
                         required
-
+                        readOnly
                         placeholder="Total points for successful compile"
 
                     ></Input.TextArea>
@@ -92,7 +92,7 @@ export default function RubricModal(props) {
                         onChange={e => setTimePoints(e.target.value)}
                         value={TimePoints}
                         required
-
+                        readOnly
                         placeholder="Total points for successful compile"
 
                     ></Input.TextArea>
@@ -102,7 +102,7 @@ export default function RubricModal(props) {
                         onChange={e => setReadabilityPoints(e.target.value)}
                         value={ReadabilityPoints}
                         required
-
+                        readOnly
                         placeholder="Total points for successful compile"
 
                     ></Input.TextArea>
