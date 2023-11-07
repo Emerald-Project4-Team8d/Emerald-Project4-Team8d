@@ -60,6 +60,7 @@ export default function LessonEditor({
         return
       }
     }
+    print(TotalPoints)
     const response = await updateLessonModule(
       learningStandard.id,
       name,

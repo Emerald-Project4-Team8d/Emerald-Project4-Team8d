@@ -522,15 +522,57 @@
           "id": {
             "type": "string"
           },
-          "TestRubric": {
-            "type": "string"
+          "TotalCompilePoints": {
+            "type": "integer"
+          },
+          "TotalSubmissionTimePoints": {
+            "type": "integer"
+          },
+          "TotalReadabilityPoints": {
+            "type": "integer"
+          },
+          "TotalPoints": {
+            "type": "integer"
+          },
+          "CompilePoints": {
+            "type": "integer"
+          },
+          "SubmissionTimePoints": {
+            "type": "integer"
+          },
+          "ReadabilityPoints": {
+            "type": "integer"
+          },
+          "Points": {
+            "type": "integer"
           }
         }
       },
       "NewRubric": {
         "properties": {
-          "TestRubric": {
-            "type": "string"
+          "TotalCompilePoints": {
+            "type": "integer"
+          },
+          "TotalSubmissionTimePoints": {
+            "type": "integer"
+          },
+          "TotalReadabilityPoints": {
+            "type": "integer"
+          },
+          "TotalPoints": {
+            "type": "integer"
+          },
+          "CompilePoints": {
+            "type": "integer"
+          },
+          "SubmissionTimePoints": {
+            "type": "integer"
+          },
+          "ReadabilityPoints": {
+            "type": "integer"
+          },
+          "Points": {
+            "type": "integer"
           },
           "created_by": {
             "type": "string"
