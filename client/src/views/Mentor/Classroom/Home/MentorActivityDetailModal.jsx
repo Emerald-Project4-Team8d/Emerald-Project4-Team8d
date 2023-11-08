@@ -39,6 +39,9 @@ const MentorActivityDetailModal = ({
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+  const [Day, setDay] = useState("")
+  const [Time, setTime] = useState("")
+  const [Today, setToday] = useState("")
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -259,6 +262,39 @@ const MentorActivityDetailModal = ({
               colorOffset={7}
             />
           </Form.Item>
+          <Form.Item>
+            <h3 id="subtitle">Due Date</h3>
+          </Form.Item>
+          <Form.Item id="form-label" label="Day Assignment is Due (Enter in yyyy/mm/dd format">
+            <Input.TextArea
+              onChange={e => setDay(e.target.value)}
+              value={Day}
+              required
+              placeholder="Day Due"
+            ></Input.TextArea>
+          </Form.Item>
+
+          <Form.Item id="form-label" label="Time Assignment is Due (11:59pm needs to be entered 23:59:00">
+            <Input.TextArea
+              onChange={e => setTime(e.target.value)}
+              value={Time}
+              required
+              placeholder="Time Due"
+              
+            ></Input.TextArea>
+          </Form.Item>
+
+          <Form.Item id="form-label" label="Due Date and Time">
+            <Input.TextArea
+              onChange={e => setToday(e.target.value)}
+              value={Day + ' ' + Time}
+
+              required
+              
+            ></Input.TextArea>
+          </Form.Item>
+
+          
           <Form.Item>
             <h3 id="subtitle">Rubric</h3>
           </Form.Item>

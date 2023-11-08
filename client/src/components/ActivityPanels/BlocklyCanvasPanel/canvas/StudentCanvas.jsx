@@ -38,6 +38,7 @@ export default function StudentCanvas({ activity }) {
   const [saves, setSaves] = useState({});
   const [lastSavedTime, setLastSavedTime] = useState(null);
   const [lastAutoSave, setLastAutoSave] = useState(null);
+  const [turnInDate, setTurnInDate] = useState('');
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const navigate = useNavigate();
@@ -302,7 +303,37 @@ export default function StudentCanvas({ activity }) {
     }
   };
   const handleCompile = async () => {
-    window.alert("Submitted " + Date());
+  const today = new Date();
+  const x = new Date('2023/11/08');
+  x.setHours(16,15,30);
+
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+let hours = today.getHours();
+let minutes = today.getMinutes();
+let seconds = today.getSeconds();
+
+if (hours < 10) hours = '0' + hours;
+if (minutes < 10) minutes = '0' + minutes;
+if (seconds < 10) seconds = '0' + seconds;
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+console.log(today);
+console.log(x);
+
+const formattedToday = dd + '/' + mm + '/' + yyyy + " @ " + hours + ":" + minutes + ":" + seconds;
+setTurnInDate(formattedToday);
+
+if(x < today){
+  window.alert("This assignment has been submitted late. Submitted at: " + formattedToday);
+}
+if(x > today){
+    window.alert("Submitted " + formattedToday);
+}
+
     if (showConsole || showPlotter) {
       message.warning(
         'Close Serial Monitor and Serial Plotter before uploading your code'
