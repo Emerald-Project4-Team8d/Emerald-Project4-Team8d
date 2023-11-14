@@ -16,6 +16,12 @@ const SCIENCE = 1
 const MAKING = 2
 const COMPUTATION = 3
 
+export function exportDay(){
+  return Day;
+}
+
+
+
 const MentorActivityDetailModal = ({
   learningStandard,
   selectActivity,
@@ -43,6 +49,7 @@ const MentorActivityDetailModal = ({
   const [Time, setTime] = useState("")
   const [Today, setToday] = useState("")
   const navigate = useNavigate()
+
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {

@@ -21,6 +21,10 @@ import { useNavigate } from 'react-router-dom';
 
 let plotId = 1;
 
+import {exportDay} from '../../../../../src/views/Mentor/Classroom/Home/MentorActivityDetailModal'; 
+
+
+
 export default function StudentCanvas({ activity }) {
   const [hoverSave, setHoverSave] = useState(false);
   const [hoverUndo, setHoverUndo] = useState(false);
@@ -304,8 +308,9 @@ export default function StudentCanvas({ activity }) {
   };
   const handleCompile = async () => {
   const today = new Date();
-  const x = new Date('2023/11/08');
-  x.setHours(16,15,30);
+  const x = exportDay();
+  const y = new Date(x);
+  y.setHours(16,15,30);
 
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1; // Months start at 0!
