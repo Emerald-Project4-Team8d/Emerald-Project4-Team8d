@@ -47,6 +47,9 @@
       "type": "text",
       "required": false
     },
+    "DueDate":{
+      "type": "text"
+    },
     "CompilePoints": {
       "type": "string"
     },

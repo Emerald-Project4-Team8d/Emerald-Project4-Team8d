@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/13/2023 3:57:17 AM"
+    "x-generation-date": "11/15/2023 7:39:34 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11874,6 +11874,9 @@
           "activity_template": {
             "type": "string"
           },
+          "DueDate": {
+            "type": "string"
+          },
           "CompilePoints": {
             "type": "string"
           },
@@ -11928,6 +11931,9 @@
             }
           },
           "activity_template": {
+            "type": "string"
+          },
+          "DueDate": {
             "type": "string"
           },
           "CompilePoints": {
@@ -12721,6 +12727,9 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "DueDate": {
+                  "type": "string"
+                },
                 "CompilePoints": {
                   "type": "string"
                 },
@@ -12867,6 +12876,9 @@
                   }
                 },
                 "activity_template": {
+                  "type": "string"
+                },
+                "DueDate": {
                   "type": "string"
                 },
                 "CompilePoints": {
@@ -13216,6 +13228,9 @@
                 }
               },
               "activity_template": {
+                "type": "string"
+              },
+              "DueDate": {
                 "type": "string"
               },
               "CompilePoints": {
@@ -14305,6 +14320,9 @@
                 }
               },
               "activity_template": {
+                "type": "string"
+              },
+              "DueDate": {
                 "type": "string"
               },
               "CompilePoints": {

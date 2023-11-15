@@ -140,6 +140,7 @@ const MentorActivityDetailModal = ({
       StandardS,
       images,
       link,
+      Day,
       CompilePoints,
       TimePoints,
       ReadabilityPoints,

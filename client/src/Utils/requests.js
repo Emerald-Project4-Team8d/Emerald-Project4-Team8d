@@ -486,6 +486,7 @@ export const updateActivityDetails = async (
   ReadabilityPoints,
   TotalPoints,
   link,
+  dueDate,
   scienceComponents,
   makingComponents,
   computationComponents
@@ -504,6 +505,7 @@ export const updateActivityDetails = async (
       ReadabilityPoints,
       TotalPoints,
       link,
+      dueDate,
       scienceComponents,
       makingComponents,
       computationComponents,
