@@ -39,7 +39,7 @@ const MentorActivityDetailModal = ({
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
-  const [ManualGrading, setManualGrading] = useState(true)
+  const [ManualGrading, setManualGrading] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const MentorActivityDetailModal = ({
       setReadabilityPoints(response.data.ReadabilityPoints)
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
-      setManualGrading(response.data.ManualGrading)
+      setManualGrading(false)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -135,6 +135,7 @@ const MentorActivityDetailModal = ({
       TimePoints,
       ReadabilityPoints,
       TotalPoints,
+      ManualGrading,
       link,
       scienceComponents,
       makingComponents,
@@ -303,13 +304,11 @@ const MentorActivityDetailModal = ({
           </Form.Item>
 
           <Form.Item id="form-label" label="Manual Grading">
-            <Input.TextArea
+            <Input type="checkbox"
               onChange={e => setManualGrading(e.target.value)}
-              required
               value={ManualGrading}
-              placeholder="Manual Grading"
 
-            ></Input.TextArea>
+            ></Input>
           </Form.Item>
 
           <h3 id="subtitle">Additional Information</h3>
