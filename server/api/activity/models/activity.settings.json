@@ -61,6 +61,10 @@
     },
     "rubric": {
       "model": "rubric"
+    },
+    "ManualGrading": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

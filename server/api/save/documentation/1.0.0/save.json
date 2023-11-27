@@ -652,6 +652,9 @@
               "rubric": {
                 "type": "string"
               },
+              "ManualGrading": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },

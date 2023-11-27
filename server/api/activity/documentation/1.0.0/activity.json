@@ -923,6 +923,10 @@
                 "type": "string"
               }
             }
+          },
+          "ManualGrading": {
+            "type": "boolean",
+            "default": true
           }
         }
       },
@@ -982,6 +986,10 @@
           },
           "rubric": {
             "type": "string"
+          },
+          "ManualGrading": {
+            "type": "boolean",
+            "default": true
           },
           "created_by": {
             "type": "string"

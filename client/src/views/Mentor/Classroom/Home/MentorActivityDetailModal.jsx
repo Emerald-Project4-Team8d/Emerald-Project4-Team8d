@@ -39,6 +39,7 @@ const MentorActivityDetailModal = ({
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+  const [ManualGrading, setManualGrading] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -59,6 +60,7 @@ const MentorActivityDetailModal = ({
       setReadabilityPoints(response.data.ReadabilityPoints)
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
+      setManualGrading(response.data.ManualGrading)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -296,6 +298,16 @@ const MentorActivityDetailModal = ({
 
               required
               placeholder="Total points for successful compile"
+
+            ></Input.TextArea>
+          </Form.Item>
+
+          <Form.Item id="form-label" label="Manual Grading">
+            <Input.TextArea
+              onChange={e => setManualGrading(e.target.value)}
+              required
+              value={ManualGrading}
+              placeholder="Manual Grading"
 
             ></Input.TextArea>
           </Form.Item>

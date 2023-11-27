@@ -28,6 +28,7 @@ export default function LessonEditor({
   const [TimePoints, setTimePoints] = useState("")
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+  const [ManualGrading, setManualGrading] = useState(true)
 
   const showModal = async () => {
     setVisible(true)
@@ -41,6 +42,7 @@ export default function LessonEditor({
     setReadabilityPoints(response.data.ReadabilityPoints)
     setTimePoints(response.data.TimePoints)
     setTotalPoints(response.data.TotalPoints)
+    setManualGrading(response.data.ManualGrading)
   }
 
   useEffect(() => {
@@ -60,7 +62,6 @@ export default function LessonEditor({
         return
       }
     }
-    print(TotalPoints)
     const response = await updateLessonModule(
       learningStandard.id,
       name,
