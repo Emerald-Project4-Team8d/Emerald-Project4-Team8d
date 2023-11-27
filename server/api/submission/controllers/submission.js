@@ -88,7 +88,7 @@ module.exports = {
             workspace,
             board,
             sketch,
-            rubric
+            rubric : new rubric(10)
         })
     },
 }

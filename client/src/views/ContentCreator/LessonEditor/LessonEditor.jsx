@@ -38,7 +38,7 @@ export default function LessonEditor({
     setLink(res.data.link)
     setLinkError(false)
     setCompilePoints(response.data.CompilePoints)
-    setReadabilityPoints(response.data.CompilePoints)
+    setReadabilityPoints(response.data.ReadabilityPoints)
     setTimePoints(response.data.TimePoints)
     setTotalPoints(response.data.TotalPoints)
   }

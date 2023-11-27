@@ -462,14 +462,14 @@ export const updateLessonModule = async (
     method: PUT,
     path: `${server}/lesson-modules/${id}`,
     data: {
-      name,
-      standards,
-      expectations,
-      link,
-      CompilePoints,
-      TimePoints,
-      TotalPoints,
-      ReadabilityPoints
+      name: name,
+      standards: standards,
+      expectations: expectations,
+      link: link,
+      CompilePoints: CompilePoints,
+      TimePoints: TimePoints,
+      TotalPoints: TotalPoints,
+      ReadabilityPoints: ReadabilityPoints
     },
     auth: true,
     error: 'Failed to update unit',
