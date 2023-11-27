@@ -58,6 +58,9 @@
     },
     "TotalPoints": {
       "type": "string"
+    },
+    "rubric": {
+      "model": "rubric"
     }
   }
 }
