@@ -598,6 +598,9 @@
                 "TotalPoints": {
                   "type": "string"
                 },
+                "rubric": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/27/2023 8:54:21 PM"
+    "x-generation-date": "11/27/2023 9:04:30 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13444,6 +13444,31 @@
           },
           "TotalPoints": {
             "type": "string"
+          },
+          "rubric": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "integer"
+              },
+              "rubric_rows": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -13499,6 +13524,9 @@
             "type": "string"
           },
           "TotalPoints": {
+            "type": "string"
+          },
+          "rubric": {
             "type": "string"
           },
           "created_by": {
@@ -14292,6 +14320,9 @@
                 "TotalPoints": {
                   "type": "string"
                 },
+                "rubric": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -14438,6 +14469,9 @@
                   "type": "string"
                 },
                 "TotalPoints": {
+                  "type": "string"
+                },
+                "rubric": {
                   "type": "string"
                 },
                 "created_by": {
@@ -14998,6 +15032,9 @@
                 "type": "string"
               },
               "TotalPoints": {
+                "type": "string"
+              },
+              "rubric": {
                 "type": "string"
               },
               "created_by": {
@@ -16090,6 +16127,9 @@
                 "type": "string"
               },
               "TotalPoints": {
+                "type": "string"
+              },
+              "rubric": {
                 "type": "string"
               },
               "created_by": {
