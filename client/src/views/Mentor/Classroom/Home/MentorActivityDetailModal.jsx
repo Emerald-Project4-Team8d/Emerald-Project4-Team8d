@@ -131,11 +131,11 @@ const MentorActivityDetailModal = ({
       //template,
       StandardS,
       images,
-      link,
       CompilePoints,
       TimePoints,
       ReadabilityPoints,
       TotalPoints,
+      link,
       scienceComponents,
       makingComponents,
       computationComponents
