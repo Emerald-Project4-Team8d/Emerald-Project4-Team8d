@@ -677,6 +677,31 @@
           "submission_time": {
             "type": "string",
             "format": "date"
+          },
+          "rubric": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "integer"
+              },
+              "rubric_rows": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -730,6 +755,9 @@
           "submission_time": {
             "type": "string",
             "format": "date"
+          },
+          "rubric": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

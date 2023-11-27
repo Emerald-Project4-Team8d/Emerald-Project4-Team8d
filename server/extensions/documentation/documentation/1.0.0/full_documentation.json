@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/27/2023 9:04:30 PM"
+    "x-generation-date": "11/27/2023 9:22:54 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -15615,6 +15615,9 @@
                 "submission_time": {
                   "type": "string"
                 },
+                "rubric": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -16146,6 +16149,31 @@
           "submission_time": {
             "type": "string",
             "format": "date"
+          },
+          "rubric": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "integer"
+              },
+              "rubric_rows": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -16199,6 +16227,9 @@
           "submission_time": {
             "type": "string",
             "format": "date"
+          },
+          "rubric": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

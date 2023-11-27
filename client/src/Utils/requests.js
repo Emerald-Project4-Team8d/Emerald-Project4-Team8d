@@ -278,7 +278,7 @@ export const getSave = async (id) =>
     error: 'Save could not be retrieved.',
   });
 
-export const createSubmission = async (id, workspace, sketch, path, isAuth) =>
+export const createSubmission = async (id, workspace, sketch, path, isAuth, rubric) =>
   makeRequest({
     method: POST,
     path: `${server}${path}`,
@@ -287,6 +287,7 @@ export const createSubmission = async (id, workspace, sketch, path, isAuth) =>
       workspace: workspace,
       board: 'arduino:avr:uno',
       sketch: sketch,
+      rubric: rubric,
     },
     auth: isAuth,
     error: 'Failed to create submission.',
