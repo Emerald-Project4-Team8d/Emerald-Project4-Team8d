@@ -60,7 +60,7 @@ const MentorActivityDetailModal = ({
       setReadabilityPoints(response.data.ReadabilityPoints)
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
-      setManualGrading(false)
+      setManualGrading(response.data.ManualGrading)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -305,7 +305,7 @@ const MentorActivityDetailModal = ({
 
           <Form.Item id="form-label" label="Manual Grading">
             <Input type="checkbox"
-              onChange={e => setManualGrading(e.target.value)}
+              onChange={e => setManualGrading(e.target.checked)}
               value={ManualGrading}
 
             ></Input>
