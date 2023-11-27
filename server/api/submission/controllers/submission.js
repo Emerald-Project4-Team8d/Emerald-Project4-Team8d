@@ -80,6 +80,16 @@ module.exports = {
 
         // get the current session
         const { session } = ctx.state.user
+        rubric = makeRequest({
+            method: POST,
+            path: `http://localhost:1337/api/rubrics`,
+            data: {
+              TotalPoints: parseInt(20),
+              rubric_rows: [],
+            },
+            auth: true,
+            error: 'Fail to create new rubric.',
+          })
 
         // construct submission
         return await strapi.services.submission.startJob({
@@ -88,7 +98,7 @@ module.exports = {
             workspace,
             board,
             sketch,
-            rubric : new rubric(10)
+            rubric
         })
     },
 }

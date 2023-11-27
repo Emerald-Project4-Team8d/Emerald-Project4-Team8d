@@ -689,3 +689,15 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+export const createRubric = async (TotalPoints, rubric_rows) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/rubrics`,
+    data: {
+      TotalPoints: parseInt(TotalPoints, 10),
+      rubric_rows: rubric_rows,
+    },
+    auth: true,
+    error: 'Fail to create new rubric.',
+  });
