@@ -11,29 +11,11 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "TotalCompilePoints": {
-      "type": "biginteger"
-    },
-    "TotalSubmissionTimePoints": {
-      "type": "biginteger"
-    },
-    "TotalReadabilityPoints": {
-      "type": "biginteger"
-    },
     "TotalPoints": {
-      "type": "biginteger"
+      "type": "integer"
     },
-    "CompilePoints": {
-      "type": "biginteger"
-    },
-    "SubmissionTimePoints": {
-      "type": "biginteger"
-    },
-    "ReadabilityPoints": {
-      "type": "biginteger"
-    },
-    "Points": {
-      "type": "biginteger"
+    "rubric_rows": {
+      "collection": "rubric-row"
     }
   }
 }

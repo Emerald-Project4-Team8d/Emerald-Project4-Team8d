@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rubric_entries",
+  "info": {
+    "name": "Rubric Entry"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Description": {
+      "type": "text"
+    },
+    "Points": {
+      "type": "integer"
+    }
+  }
+}
