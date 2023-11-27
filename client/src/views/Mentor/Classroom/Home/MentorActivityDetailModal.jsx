@@ -306,7 +306,7 @@ const MentorActivityDetailModal = ({
           <Form.Item id="form-label" label="Manual Grading">
             <Input type="checkbox"
               onChange={e => setManualGrading(e.target.checked)}
-              value={ManualGrading}
+              checked={ManualGrading}
 
             ></Input>
           </Form.Item>

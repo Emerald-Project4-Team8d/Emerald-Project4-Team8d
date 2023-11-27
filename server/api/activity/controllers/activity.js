@@ -38,6 +38,11 @@ module.exports = {
         id: 'activity.update.body.invalid',
         error: 'ValidationError',
       });
+    if (!ManualGrading)
+      return ctx.badRequest('Manual Grading must be provided!', {
+        id: 'activity.update.body.invalid',
+        error: 'ValidationError',
+      });
 
     // array to store new component
     let activityComponents = [];
