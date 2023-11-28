@@ -23,14 +23,15 @@ import { useNavigate } from 'react-router-dom';
 
 let plotId = 1;
 
-async function fetchData(activity, turnInDate,setTurnInDate) {
+async function fetchData(activity, setTurnInTime,setTurnInDate) {
   try {
     console.log(activity.id);
     console.log("FFFF");
     const response = await getActivity(activity.id);
     const activityData = response.data;
     setTurnInDate(response.data.Date);
-    console.log(turnInDate);
+    setTurnInTime(response.data.Time);
+
   } catch (error) {
     console.error('Error fetching activity data:', error);
     // Handle the error (e.g., show an error message to the user)
@@ -56,6 +57,8 @@ export default function StudentCanvas({ activity }) {
   const [lastSavedTime, setLastSavedTime] = useState(null);
   const [lastAutoSave, setLastAutoSave] = useState(null);
   const [turnInDate, setTurnInDate] = useState('');
+  const [turnInTime, setTurnInTime] = useState('');
+  
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const navigate = useNavigate();
@@ -65,7 +68,7 @@ export default function StudentCanvas({ activity }) {
   const replayRef = useRef([]);
   const clicks = useRef(0);
 
-  fetchData(activity, turnInDate,setTurnInDate);
+  fetchData(activity, setTurnInTime,setTurnInDate);
   
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
@@ -331,15 +334,25 @@ export default function StudentCanvas({ activity }) {
   const today = new Date();
 
 const x = new Date(turnInDate);
+const time = turnInTime.split(":")
+let hours = parseInt(time[0], 10);
+let minutes = parseInt(time[1], 10);
+let seconds = parseInt(time[2], 10);
+if (hours < 10) hours = '0' + hours;
+if (minutes < 10) minutes = '0' + minutes;
+if (seconds < 10) seconds = '0' + seconds;
 
-
+x.setHours(hours);
+x.setMinutes(minutes);
+x.setSeconds(seconds); 
+const due = turnInDate + " @ " + hours + ":" + minutes + ":" + seconds;
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1; // Months start at 0!
 let dd = today.getDate();
 
-let hours = today.getHours();
-let minutes = today.getMinutes();
-let seconds = today.getSeconds();
+hours = today.getHours();
+minutes = today.getMinutes();
+seconds = today.getSeconds();
 
 if (hours < 10) hours = '0' + hours;
 if (minutes < 10) minutes = '0' + minutes;
@@ -354,7 +367,7 @@ const formattedToday = yyyy + '/' + mm + '/' + dd + " @ " + hours + ":" + minute
 
 
 if(x < today){
-  window.alert("This assignment has been submitted late. Submitted at: " + formattedToday +" but was due at: " + turnInDate );
+  window.alert("This assignment has been submitted late. Submitted at: " + formattedToday +" but was due at: " + due );
 }
 if(x > today){
     window.alert("Submitted " + formattedToday);
