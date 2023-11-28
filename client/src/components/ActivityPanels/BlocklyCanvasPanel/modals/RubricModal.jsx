@@ -36,6 +36,7 @@ export default function RubricModal(props) {
     }
 
     const handleOk = () => {
+        print("Saved")
         setVisible(false)
     }
 

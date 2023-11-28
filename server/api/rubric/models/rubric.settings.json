@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rubrics",
+  "info": {
+    "name": "rubric",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "TotalPoints": {
+      "type": "integer"
+    },
+    "rubric_rows": {
+      "collection": "rubric-row"
+    }
+  }
+}

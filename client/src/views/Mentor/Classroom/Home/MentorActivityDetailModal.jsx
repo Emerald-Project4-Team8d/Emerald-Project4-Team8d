@@ -48,6 +48,7 @@ const MentorActivityDetailModal = ({
   const [Day, setDay] = useState("")
   const [Time, setTime] = useState("")
   const [Today, setToday] = useState("")
+  const [ManualGrading, setManualGrading] = useState(false)
   const navigate = useNavigate()
 
 
@@ -69,6 +70,7 @@ const MentorActivityDetailModal = ({
       setReadabilityPoints(response.data.ReadabilityPoints)
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
+      setManualGrading(response.data.ManualGrading)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -140,11 +142,12 @@ const MentorActivityDetailModal = ({
       StandardS,
       images,
       link,
-      Day,
       CompilePoints,
       TimePoints,
       ReadabilityPoints,
       TotalPoints,
+      ManualGrading,
+      link,
       scienceComponents,
       makingComponents,
       computationComponents
@@ -342,6 +345,14 @@ const MentorActivityDetailModal = ({
               placeholder="Total points for successful compile"
 
             ></Input.TextArea>
+          </Form.Item>
+
+          <Form.Item id="form-label" label="Manual Grading">
+            <Input type="checkbox"
+              onChange={e => setManualGrading(e.target.checked)}
+              checked={ManualGrading}
+
+            ></Input>
           </Form.Item>
 
           <h3 id="subtitle">Additional Information</h3>

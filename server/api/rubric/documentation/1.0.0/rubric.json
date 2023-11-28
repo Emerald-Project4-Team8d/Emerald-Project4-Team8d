@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/activities": {
+    "/rubrics": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Activity"
+                    "$ref": "#/components/schemas/Rubric"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Activity"
+          "Rubric"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Activity"
+                  "$ref": "#/components/schemas/Rubric"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Activity"
+          "Rubric"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewActivity"
+                "$ref": "#/components/schemas/NewRubric"
               }
             }
           }
         }
       }
     },
-    "/activities/count": {
+    "/rubrics/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Activity"
+          "Rubric"
         ],
         "parameters": []
       }
     },
-    "/activities/{id}": {
+    "/rubrics/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Activity"
+                  "$ref": "#/components/schemas/Rubric"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Activity"
+          "Rubric"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Activity"
+                  "$ref": "#/components/schemas/Rubric"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Activity"
+          "Rubric"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewActivity"
+                "$ref": "#/components/schemas/NewRubric"
               }
             }
           }
@@ -495,242 +495,8 @@
         },
         "summary": "",
         "tags": [
-          "Activity"
+          "Rubric"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/activities/toolbox/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Activity"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/activities/template/{id}": {
-      "put": {
-        "deprecated": false,
-        "description": "Update a record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Activity"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/activities/activity_template/{id}": {
-      "put": {
-        "deprecated": false,
-        "description": "Update a record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Activity"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "name": "id",
@@ -748,109 +514,18 @@
   },
   "components": {
     "schemas": {
-      "Activity": {
+      "Rubric": {
         "required": [
-          "id",
-          "number",
-          "template"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "lesson_module": {
-            "required": [
-              "id",
-              "number",
-              "name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "number": {
-                "type": "number"
-              },
-              "name": {
-                "type": "string"
-              },
-              "expectations": {
-                "type": "string"
-              },
-              "activities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "unit": {
-                "type": "string"
-              },
-              "standards": {
-                "type": "string"
-              },
-              "link": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "number": {
+          "TotalPoints": {
             "type": "integer"
           },
-          "template": {
-            "type": "string"
-          },
-          "blocks": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "blocks_category": {
-                  "type": "string"
-                },
-                "image_url": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "description": {
-            "type": "string"
-          },
-          "StandardS": {
-            "type": "string"
-          },
-          "images": {
-            "type": "string"
-          },
-          "link": {
-            "type": "string"
-          },
-          "learning_components": {
+          "rubric_rows": {
             "type": "array",
             "items": {
               "required": [
@@ -860,16 +535,19 @@
                 "id": {
                   "type": "string"
                 },
-                "type": {
+                "CategoryName": {
                   "type": "string"
                 },
-                "activities": {
+                "PossiblePoints": {
+                  "type": "integer"
+                },
+                "rubric_entries": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "learning_component_type": {
+                "selected_rubric_entry": {
                   "type": "string"
                 },
                 "published_at": {
@@ -883,143 +561,19 @@
                 }
               }
             }
-          },
-          "activity_template": {
-            "type": "string"
-          },
-          "DueDate":{
-            "type": "string"
-          },
-          "CompilePoints": {
-            "type": "string"
-          },
-          "TimePoints": {
-            "type": "string"
-          },
-          "ReadabilityPoints": {
-            "type": "string"
-          },
-          "TotalPoints": {
-            "type": "string"
-          },
-          "CompilePoints": {
-            "type": "string"
-          },
-          "TimePoints": {
-            "type": "string"
-          },
-          "ReadabilityPoints": {
-            "type": "string"
-          },
-          "TotalPoints": {
-            "type": "string"
-          },
-          "rubric": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "TotalPoints": {
-                "type": "integer"
-              },
-              "rubric_rows": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "ManualGrading": {
-            "type": "boolean",
-            "default": true
           }
         }
       },
-      "NewActivity": {
-        "required": [
-          "number",
-          "template"
-        ],
+      "NewRubric": {
         "properties": {
-          "lesson_module": {
-            "type": "string"
-          },
-          "number": {
+          "TotalPoints": {
             "type": "integer"
           },
-          "template": {
-            "type": "string"
-          },
-          "blocks": {
+          "rubric_rows": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "description": {
-            "type": "string"
-          },
-          "StandardS": {
-            "type": "string"
-          },
-          "images": {
-            "type": "string"
-          },
-          "link": {
-            "type": "string"
-          },
-          "learning_components": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "activity_template": {
-            "type": "string"
-          },
-          "DueDate":{
-            "type": "string"
-          },
-          "CompilePoints": {
-            "type": "string"
-          },
-          "TimePoints": {
-            "type": "string"
-          },
-          "ReadabilityPoints": {
-            "type": "string"
-          },
-          "TotalPoints": {
-            "type": "string"
-          },
-          "CompilePoints": {
-            "type": "string"
-          },
-          "TimePoints": {
-            "type": "string"
-          },
-          "ReadabilityPoints": {
-            "type": "string"
-          },
-          "TotalPoints": {
-            "type": "string"
-          },
-          "rubric": {
-            "type": "string"
-          },
-          "ManualGrading": {
-            "type": "boolean",
-            "default": true
           },
           "created_by": {
             "type": "string"
@@ -1033,7 +587,7 @@
   },
   "tags": [
     {
-      "name": "Activity"
+      "name": "Rubric"
     }
   ]
 }

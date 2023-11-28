@@ -25,12 +25,22 @@ module.exports = {
       StandardS,
       link,
       dueDate,
+      CompilePoints,
+      TimePoints,
+      TotalPoints,
+      ReadabilityPoints,
+      ManualGrading,
       scienceComponents,
       makingComponents,
       computationComponents,
     } = ctx.request.body;
     if (!StandardS || !description)
       return ctx.badRequest('A description, Standards must be provided!', {
+        id: 'activity.update.body.invalid',
+        error: 'ValidationError',
+      });
+    if (!ManualGrading)
+      return ctx.badRequest('Manual Grading must be provided!', {
         id: 'activity.update.body.invalid',
         error: 'ValidationError',
       });
@@ -106,7 +116,7 @@ module.exports = {
 
     const updatedActivity = await strapi.services.activity.update(
       { id },
-      { description, images, StandardS, link, dueDate, learning_components: activityComponents }
+      { description, images, StandardS, link, learning_components: activityComponents }
     );
     return sanitizeEntity(updatedActivity, { model: strapi.models.activity });
   },

@@ -278,7 +278,7 @@ export const getSave = async (id) =>
     error: 'Save could not be retrieved.',
   });
 
-export const createSubmission = async (id, workspace, sketch, path, isAuth) =>
+export const createSubmission = async (id, workspace, sketch, path, isAuth, rubric) =>
   makeRequest({
     method: POST,
     path: `${server}${path}`,
@@ -287,6 +287,7 @@ export const createSubmission = async (id, workspace, sketch, path, isAuth) =>
       workspace: workspace,
       board: 'arduino:avr:uno',
       sketch: sketch,
+      rubric: rubric,
     },
     auth: isAuth,
     error: 'Failed to create submission.',
@@ -459,16 +460,24 @@ export const updateLessonModule = async (
   name,
   expectations,
   standards,
-  link
+  link,
+  CompilePoints,
+  TimePoints,
+  TotalPoints,
+  ReadabilityPoints
 ) =>
   makeRequest({
     method: PUT,
     path: `${server}/lesson-modules/${id}`,
     data: {
-      name,
-      standards,
-      expectations,
-      link,
+      name: name,
+      standards: standards,
+      expectations: expectations,
+      link: link,
+      CompilePoints: CompilePoints,
+      TimePoints: TimePoints,
+      TotalPoints: TotalPoints,
+      ReadabilityPoints: ReadabilityPoints
     },
     auth: true,
     error: 'Failed to update unit',
@@ -485,6 +494,7 @@ export const updateActivityDetails = async (
   TimePoints,
   ReadabilityPoints,
   TotalPoints,
+  ManualGrading,
   link,
   dueDate,
   scienceComponents,
@@ -504,6 +514,7 @@ export const updateActivityDetails = async (
       TimePoints,
       ReadabilityPoints,
       TotalPoints,
+      ManualGrading,
       link,
       dueDate,
       scienceComponents,
@@ -689,4 +700,16 @@ export const getClassroomWorkspace = async (id) =>
     path: `${server}/classroom/workspaces/${id}`,
     auth: true,
     error: 'Unable to retrive classroom workspaces',
+  });
+
+export const createRubric = async (TotalPoints, rubric_rows) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/rubrics`,
+    data: {
+      TotalPoints: parseInt(TotalPoints, 10),
+      rubric_rows: rubric_rows,
+    },
+    auth: true,
+    error: 'Fail to create new rubric.',
   });

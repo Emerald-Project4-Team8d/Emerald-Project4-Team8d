@@ -28,6 +28,7 @@ export default function LessonEditor({
   const [TimePoints, setTimePoints] = useState("")
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+  const [ManualGrading, setManualGrading] = useState(true)
 
   const showModal = async () => {
     setVisible(true)
@@ -38,9 +39,10 @@ export default function LessonEditor({
     setLink(res.data.link)
     setLinkError(false)
     setCompilePoints(response.data.CompilePoints)
-    setReadabilityPoints(response.data.CompilePoints)
+    setReadabilityPoints(response.data.ReadabilityPoints)
     setTimePoints(response.data.TimePoints)
     setTotalPoints(response.data.TotalPoints)
+    setManualGrading(response.data.ManualGrading)
   }
 
   useEffect(() => {

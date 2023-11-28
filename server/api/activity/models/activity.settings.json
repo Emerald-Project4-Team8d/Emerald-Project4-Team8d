@@ -61,6 +61,25 @@
     },
     "TotalPoints": {
       "type": "string"
+    },
+    "CompilePoints": {
+      "type": "string"
+    },
+    "TimePoints": {
+      "type": "string"
+    },
+    "ReadabilityPoints": {
+      "type": "string"
+    },
+    "TotalPoints": {
+      "type": "string"
+    },
+    "rubric": {
+      "model": "rubric"
+    },
+    "ManualGrading": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

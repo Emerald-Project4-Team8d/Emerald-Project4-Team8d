@@ -74,7 +74,8 @@ export const compileArduinoCode = async (
     workspaceText,
     sketch,
     path,
-    isStudent
+    isStudent,
+    null
   );
 
   // if we fail to create submission
