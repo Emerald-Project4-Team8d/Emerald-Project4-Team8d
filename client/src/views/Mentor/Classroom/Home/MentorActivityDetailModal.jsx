@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal } from "antd"
+import { Button, Form, Input, message, Modal, Table } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
@@ -15,6 +15,18 @@ import RubricModal from "../../../../components/ActivityPanels/BlocklyCanvasPane
 const SCIENCE = 1
 const MAKING = 2
 const COMPUTATION = 3
+
+const generateEmptyRubricData = (rows, columns) => {
+  const data = Array.from({ length: rows }).map((_, rowIndex) => {
+    const row = { key: rowIndex, row: rowIndex + 1 };
+    for (let j = 0; j < columns; j++) {
+      row[`col-${j}`] = { points: '' };
+    }
+    return row;
+  });
+  return data;
+};
+
 
 const MentorActivityDetailModal = ({
   learningStandard,
@@ -35,13 +47,15 @@ const MentorActivityDetailModal = ({
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const [linkError, setLinkError] = useState(false)
   const [submitButton, setSubmitButton] = useState(0)
-
-  // Create point variables to store input values for rubric
   const [CompilePoints, setCompilePoints] = useState("")
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+  const [ManualGrading, setManualGrading] = useState(false)
 
+  const [rubricRows, setRubricRows] = useState(1);
+  const [rubricColumns, setRubricColumns] = useState(1);
+  const [rubricData, setRubricData] = useState(generateEmptyRubricData(1,1));
 
   const navigate = useNavigate()
 
@@ -52,8 +66,6 @@ const MentorActivityDetailModal = ({
         message.error(response.err)
         return
       }
-
-      // set the values below to the input values
       setDescription(response.data.description)
       setTemplate(response.data.template)
       setActivityTemplate(response.data.activity_template)
@@ -65,6 +77,7 @@ const MentorActivityDetailModal = ({
       setReadabilityPoints(response.data.ReadabilityPoints)
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
+      setManualGrading(response.data.ManualGrading)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -135,11 +148,12 @@ const MentorActivityDetailModal = ({
       //template,
       StandardS,
       images,
-      link,
       CompilePoints,
       TimePoints,
       ReadabilityPoints,
       TotalPoints,
+      ManualGrading,
+      link,
       scienceComponents,
       makingComponents,
       computationComponents
@@ -168,8 +182,31 @@ const MentorActivityDetailModal = ({
     setVisible(true)
     //setOpen(true)
   };
+
+  const handleRowsChange = (increment) => {
+    setRubricRows((prevRows) => Math.max(1, prevRows + increment));
+    setRubricData(generateEmptyRubricData(rubricRows + increment, rubricColumns));
+  };
+  
+  const handleColumnsChange = (increment) => {
+    setRubricColumns((prevColumns) => Math.max(1, prevColumns + increment));
+    setRubricData(generateEmptyRubricData(rubricRows, rubricColumns + increment));
+  };
+  
+
+  const handleRubricChange = (value, field, rowIndex, colIndex) => {
+    setRubricData(prevData => {
+      const updatedData = [...prevData];
+      const updatedRow = { ...updatedData[rowIndex] };
+      updatedRow[`col-${colIndex}`] = { ...updatedRow[`col-${colIndex}`], [field]: value };
+      updatedData[rowIndex] = updatedRow;
+      return updatedData;
+    });
+  };
+
   return (
     <div id="mentoredit">
+
       <Button id="view-activity-button"
         onClick={showModal} style={{ width: '40px', marginRight: "auto" }} >
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
@@ -268,8 +305,6 @@ const MentorActivityDetailModal = ({
           <Form.Item>
             <h3 id="subtitle">Rubric</h3>
           </Form.Item>
-
-          {/* Creates the box for teacher to update/input compile points / stores value*/}
           <Form.Item id="form-label" label="Compile">
             <Input.TextArea
               onChange={e => setCompilePoints(e.target.value)}
@@ -279,30 +314,23 @@ const MentorActivityDetailModal = ({
 
             ></Input.TextArea>
           </Form.Item>
-
-          {/* Creates the box for teacher to update/input submission points / stores value*/}
           <Form.Item id="form-label" label="Submission Time">
             <Input.TextArea
               onChange={e => setTimePoints(e.target.value)}
               value={TimePoints}
               required
-              placeholder="Total points for successful on-time submission"
+              placeholder="Total points for successful compile"
 
             ></Input.TextArea>
           </Form.Item>
-
-          {/* Creates the box for teacher to update/input readability points / stores value*/}
           <Form.Item id="form-label" label="Readability">
             <Input.TextArea
               onChange={e => setReadabilityPoints(e.target.value)}
               value={ReadabilityPoints}
               required
-              placeholder="Total points for readable code"
+              placeholder="Total points for successful compile"
 
             ></Input.TextArea>
-
-          {/* Creates the box for total points by adding up the 3 above values / stores value*/}
-          {/* Edge case to check and make sure that the values are integer when adding them together, otherwise dont add it*/}
           </Form.Item>
           <Form.Item id="form-label" label="Total">
             <Input.TextArea
@@ -310,10 +338,89 @@ const MentorActivityDetailModal = ({
               value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0)).toString()}
 
               required
-              placeholder="Total points for assignment"
+              placeholder="Total points for successful compile"
 
             ></Input.TextArea>
           </Form.Item>
+          
+
+          <Form.Item id="form-label" label="Rubric Rows">
+            <Input
+              type="number"
+              value={rubricRows}
+              onChange={(e) => handleRowsChange(parseInt(e.target.value, 10))}
+            />
+          </Form.Item>
+          <Form.Item id="form-label" label="Rubric Columns">
+            <Input
+              type="number"
+              value={rubricColumns}
+              onChange={(e) => handleColumnsChange(parseInt(e.target.value, 10))}
+            />
+          </Form.Item>
+          
+          <Form.Item id="form-label" label="Rubric">
+  {rubricRows > 0 && rubricColumns > 0 && (
+    <Table
+      dataSource={rubricData.map((_, index) => ({ key: index, ..._ }))}
+      columns={[
+        {
+          title: 'Row',
+          dataIndex: 'row',
+          fixed: 'left',
+          width: 100,  // Set the width to the desired value
+          render: (_, record, rowIndex) => (
+            <Input
+              value={record[`col-0`].points}
+              placeholder="Points"
+              style={{ height: '50px' }}  // Set the height to the desired value
+              onChange={(e) =>
+                handleRubricChange(
+                  e.target.value,
+                  'points',
+                  rowIndex,
+                  0  // Use 0 for the Row
+                )
+              }
+            />
+          ),
+        },
+        ...Array.from({ length: rubricColumns }).map((_, colIndex) => ({
+          title: `Column ${colIndex + 1}`,
+          dataIndex: `col-${colIndex}`,
+          width: 100,  // Set the width to the same value as 'Row'
+          render: (_, record, rowIndex) => (
+            <Input
+              value={record[`col-${colIndex}`].points}
+              onChange={(e) =>
+                handleRubricChange(
+                  e.target.value,
+                  'points',
+                  rowIndex,
+                  colIndex
+                )
+              }
+              placeholder="Points"
+            />
+          ),
+        })),
+      ]}
+      pagination={false}
+      bordered
+      size="small"
+      scroll={{ x: 'max-content' }}
+    />
+  )}
+</Form.Item>
+      
+          <Form.Item id="form-label" label="Manual Grading">
+            <Input type="checkbox"
+              onChange={e => setManualGrading(e.target.checked)}
+              checked={ManualGrading}
+
+            ></Input>
+          </Form.Item>
+      
 
           <h3 id="subtitle">Additional Information</h3>
           <Form.Item
