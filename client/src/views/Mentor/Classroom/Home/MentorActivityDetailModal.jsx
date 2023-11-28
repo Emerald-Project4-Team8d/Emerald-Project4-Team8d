@@ -348,14 +348,14 @@ const MentorActivityDetailModal = ({
             <Input
               type="number"
               value={rubricRows}
-              onChange={(e) => handleRowsChange(parseInt(e.target.value, 10))}
+              onChange={(e) => handleRowsChange(parseInt(1, 10))}
             />
           </Form.Item>
           <Form.Item id="form-label" label="Rubric Columns">
             <Input
               type="number"
               value={rubricColumns}
-              onChange={(e) => handleColumnsChange(parseInt(e.target.value, 10))}
+              onChange={(e) => handleColumnsChange(parseInt(1, 10))}
             />
           </Form.Item>
           
