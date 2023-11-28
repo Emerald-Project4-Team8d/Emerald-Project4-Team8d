@@ -184,13 +184,23 @@ const MentorActivityDetailModal = ({
   };
 
   const handleRowsChange = (increment) => {
+    increment = increment - rubricRows
+    if (increment < 0 && rubricRows == 1) {
+      increment = 0
+    }
     setRubricRows((prevRows) => Math.max(1, prevRows + increment));
     setRubricData(generateEmptyRubricData(rubricRows + increment, rubricColumns));
+    console.log(rubricData)
   };
   
   const handleColumnsChange = (increment) => {
+    increment = increment - rubricColumns
+    if (increment < 0 && rubricColumns == 1) {
+      increment = 0
+    }
     setRubricColumns((prevColumns) => Math.max(1, prevColumns + increment));
     setRubricData(generateEmptyRubricData(rubricRows, rubricColumns + increment));
+    console.log(rubricData)
   };
   
 
@@ -202,6 +212,7 @@ const MentorActivityDetailModal = ({
       updatedData[rowIndex] = updatedRow;
       return updatedData;
     });
+    console.log(rubricData)
   };
 
   return (
@@ -348,14 +359,14 @@ const MentorActivityDetailModal = ({
             <Input
               type="number"
               value={rubricRows}
-              onChange={(e) => handleRowsChange(parseInt(1, 10))}
+              onChange={(e) => handleRowsChange(parseInt(e.target.value, 10))}
             />
           </Form.Item>
           <Form.Item id="form-label" label="Rubric Columns">
             <Input
               type="number"
               value={rubricColumns}
-              onChange={(e) => handleColumnsChange(parseInt(1, 10))}
+              onChange={(e) => handleColumnsChange(parseInt(e.target.value, 10))}
             />
           </Form.Item>
           
