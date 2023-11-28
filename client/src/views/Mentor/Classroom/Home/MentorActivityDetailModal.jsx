@@ -16,9 +16,7 @@ const SCIENCE = 1
 const MAKING = 2
 const COMPUTATION = 3
 
-export function exportDay(){
-  return Day;
-}
+
 
 
 

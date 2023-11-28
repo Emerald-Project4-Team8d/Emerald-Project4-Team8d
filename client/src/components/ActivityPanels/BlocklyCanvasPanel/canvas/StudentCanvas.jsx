@@ -9,6 +9,8 @@ import PlotterModal from '../modals/PlotterModal';
 import DisplayDiagramModal from '../modals/DisplayDiagramModal'
 import VersionHistoryModal from '../modals/VersionHistoryModal';
 import RubricModal from '../modals/RubricModal';
+import MentorActivityDetailModal from '../../../../../src/views/Mentor/Classroom/Home/MentorActivityDetailModal';
+import { getActivity } from '../../../../Utils/requests';
 
 import {
   connectToPort,
@@ -21,8 +23,19 @@ import { useNavigate } from 'react-router-dom';
 
 let plotId = 1;
 
-import {exportDay} from '../../../../../src/views/Mentor/Classroom/Home/MentorActivityDetailModal'; 
-
+async function fetchData(activity, turnInDate,setTurnInDate) {
+  try {
+    console.log(activity.id);
+    console.log("FFFF");
+    const response = await getActivity(activity.id);
+    const activityData = response.data;
+    setTurnInDate(response.data.Date);
+    console.log(turnInDate);
+  } catch (error) {
+    console.error('Error fetching activity data:', error);
+    // Handle the error (e.g., show an error message to the user)
+  }
+}
 
 
 export default function StudentCanvas({ activity }) {
@@ -52,6 +65,8 @@ export default function StudentCanvas({ activity }) {
   const replayRef = useRef([]);
   const clicks = useRef(0);
 
+  fetchData(activity, turnInDate,setTurnInDate);
+  
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
       toolbox: document.getElementById('toolbox'),
@@ -59,8 +74,11 @@ export default function StudentCanvas({ activity }) {
     window.Blockly.addChangeListener(blocklyEvent);
   };
 
+
+  
   const loadSave = (selectedSave) => {
     try {
+      
       let toLoad = activity.template;
       if (selectedSave !== -1) {
         if (lastAutoSave && selectedSave === -2) {
@@ -306,11 +324,14 @@ export default function StudentCanvas({ activity }) {
       setShowPlotter(false);
     }
   };
+
+ 
+  console.log(turnInDate);
   const handleCompile = async () => {
   const today = new Date();
-  const x = exportDay();
-  const y = new Date(x);
-  y.setHours(16,15,30);
+
+const x = new Date(turnInDate);
+
 
 const yyyy = today.getFullYear();
 let mm = today.getMonth() + 1; // Months start at 0!
@@ -326,14 +347,14 @@ if (seconds < 10) seconds = '0' + seconds;
 
 if (dd < 10) dd = '0' + dd;
 if (mm < 10) mm = '0' + mm;
-console.log(today);
-console.log(x);
 
-const formattedToday = dd + '/' + mm + '/' + yyyy + " @ " + hours + ":" + minutes + ":" + seconds;
-setTurnInDate(formattedToday);
+
+
+const formattedToday = mm + '/' + dd + '/' + yyyy + " @ " + hours + ":" + minutes + ":" + seconds;
+
 
 if(x < today){
-  window.alert("This assignment has been submitted late. Submitted at: " + formattedToday);
+  window.alert("This assignment has been submitted late. Submitted at: " + formattedToday +" but was due at: " + turnInDate );
 }
 if(x > today){
     window.alert("Submitted " + formattedToday);
