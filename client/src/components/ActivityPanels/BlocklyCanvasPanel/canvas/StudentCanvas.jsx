@@ -350,7 +350,7 @@ if (mm < 10) mm = '0' + mm;
 
 
 
-const formattedToday = mm + '/' + dd + '/' + yyyy + " @ " + hours + ":" + minutes + ":" + seconds;
+const formattedToday = yyyy + '/' + mm + '/' + dd + " @ " + hours + ":" + minutes + ":" + seconds;
 
 
 if(x < today){
