@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/15/2023 7:39:34 PM"
+    "x-generation-date": "11/28/2023 1:35:21 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13432,6 +13432,56 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "DueDate": {
+            "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
+            "type": "string"
+          },
+          "rubric": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "integer"
+              },
+              "rubric_rows": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "ManualGrading": {
+            "type": "boolean",
+            "default": true
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
           }
         }
       },
@@ -13475,6 +13525,34 @@
             }
           },
           "activity_template": {
+            "type": "string"
+          },
+          "DueDate": {
+            "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
+            "type": "string"
+          },
+          "rubric": {
+            "type": "string"
+          },
+          "ManualGrading": {
+            "type": "boolean",
+            "default": true
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Time": {
             "type": "string"
           },
           "created_by": {
@@ -14256,6 +14334,33 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "DueDate": {
+                  "type": "string"
+                },
+                "CompilePoints": {
+                  "type": "string"
+                },
+                "TimePoints": {
+                  "type": "string"
+                },
+                "ReadabilityPoints": {
+                  "type": "string"
+                },
+                "TotalPoints": {
+                  "type": "string"
+                },
+                "rubric": {
+                  "type": "string"
+                },
+                "ManualGrading": {
+                  "type": "boolean"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -14390,6 +14495,33 @@
                   }
                 },
                 "activity_template": {
+                  "type": "string"
+                },
+                "DueDate": {
+                  "type": "string"
+                },
+                "CompilePoints": {
+                  "type": "string"
+                },
+                "TimePoints": {
+                  "type": "string"
+                },
+                "ReadabilityPoints": {
+                  "type": "string"
+                },
+                "TotalPoints": {
+                  "type": "string"
+                },
+                "rubric": {
+                  "type": "string"
+                },
+                "ManualGrading": {
+                  "type": "boolean"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "Time": {
                   "type": "string"
                 },
                 "created_by": {
@@ -14938,6 +15070,33 @@
                 }
               },
               "activity_template": {
+                "type": "string"
+              },
+              "DueDate": {
+                "type": "string"
+              },
+              "CompilePoints": {
+                "type": "string"
+              },
+              "TimePoints": {
+                "type": "string"
+              },
+              "ReadabilityPoints": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "string"
+              },
+              "rubric": {
+                "type": "string"
+              },
+              "ManualGrading": {
+                "type": "boolean"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "Time": {
                 "type": "string"
               },
               "created_by": {
@@ -16021,6 +16180,33 @@
                 }
               },
               "activity_template": {
+                "type": "string"
+              },
+              "DueDate": {
+                "type": "string"
+              },
+              "CompilePoints": {
+                "type": "string"
+              },
+              "TimePoints": {
+                "type": "string"
+              },
+              "ReadabilityPoints": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "string"
+              },
+              "rubric": {
+                "type": "string"
+              },
+              "ManualGrading": {
+                "type": "boolean"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "Time": {
                 "type": "string"
               },
               "created_by": {

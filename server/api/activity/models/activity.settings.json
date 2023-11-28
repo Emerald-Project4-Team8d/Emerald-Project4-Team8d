@@ -47,20 +47,8 @@
       "type": "text",
       "required": false
     },
-    "DueDate":{
+    "DueDate": {
       "type": "text"
-    },
-    "CompilePoints": {
-      "type": "string"
-    },
-    "TimePoints": {
-      "type": "string"
-    },
-    "ReadabilityPoints": {
-      "type": "string"
-    },
-    "TotalPoints": {
-      "type": "string"
     },
     "CompilePoints": {
       "type": "string"
@@ -80,6 +68,12 @@
     "ManualGrading": {
       "type": "boolean",
       "default": true
+    },
+    "Date": {
+      "type": "string"
+    },
+    "Time": {
+      "type": "string"
     }
   }
 }

@@ -47,7 +47,7 @@ const MentorActivityDetailModal = ({
   const [TotalPoints, setTotalPoints] = useState("")
   const [Day, setDay] = useState("")
   const [Time, setTime] = useState("")
-  const [Today, setToday] = useState("")
+  const [DueDate, setDueDate] = useState("")
   const [ManualGrading, setManualGrading] = useState(false)
   const navigate = useNavigate()
 
@@ -71,6 +71,8 @@ const MentorActivityDetailModal = ({
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
       setManualGrading(response.data.ManualGrading)
+      setDay(response.data.Date)
+      setTime(response.data.Time)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -141,13 +143,15 @@ const MentorActivityDetailModal = ({
       //template,
       StandardS,
       images,
-      link,
       CompilePoints,
       TimePoints,
       ReadabilityPoints,
       TotalPoints,
       ManualGrading,
       link,
+      Day,
+      Time,
+      DueDate,
       scienceComponents,
       makingComponents,
       computationComponents
@@ -297,7 +301,7 @@ const MentorActivityDetailModal = ({
 
           <Form.Item id="form-label" label="Due Date and Time">
             <Input.TextArea
-              onChange={e => setToday(e.target.value)}
+              onChange={e => setDueDate(e.target.value)}
               value={Day + ' ' + Time}
 
               required
@@ -346,14 +350,14 @@ const MentorActivityDetailModal = ({
 
             ></Input.TextArea>
           </Form.Item>
-
+{/* 
           <Form.Item id="form-label" label="Manual Grading">
             <Input type="checkbox"
               onChange={e => setManualGrading(e.target.checked)}
               checked={ManualGrading}
 
             ></Input>
-          </Form.Item>
+          </Form.Item> */}
 
           <h3 id="subtitle">Additional Information</h3>
           <Form.Item
