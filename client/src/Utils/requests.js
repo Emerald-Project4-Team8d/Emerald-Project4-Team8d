@@ -139,12 +139,12 @@ export const getStudents = async (code) =>
   });
 
 export const getStudent = async (id) =>
-  makeRequest({
-    method: GET,
-    path: `${server}/students/${id}`,
-    auth: true,
-    error: 'Student info could not be retrieved.',
-  });
+    makeRequest({
+        method: GET,
+        path: `${server}/students/${id}`,
+        auth: true,
+        error: 'Student info could not be retrieved.',
+    });
 
 export const postJoin = async (code, ids) =>
   makeRequest({
