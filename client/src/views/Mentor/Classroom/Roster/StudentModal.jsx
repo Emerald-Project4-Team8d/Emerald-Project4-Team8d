@@ -1,5 +1,8 @@
 import { Modal, Button } from 'antd';
 import React, { useState } from 'react';
+import {
+    getStudent,
+} from '../../../../Utils/requests';
 
 export default function StudentModal({ linkBtn, student, getFormattedDate }) {
   const [visible, setVisible] = useState(false);
@@ -10,6 +13,10 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
 
   const handleCancel = () => {
     setVisible(false);
+  };
+
+  const handleViewSubmission = (key) => {
+      getStudent(key).then(res => console.log(res))
   };
 
   const handleOk = () => {
@@ -26,6 +33,9 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
         visible={visible}
         onCancel={handleCancel}
         footer={[
+          <Button key='ok' type='secondary' onClick={() => handleViewSubmission(student.key)}>
+            View Submission
+          </Button>,
           <Button key='ok' type='primary' onClick={handleOk}>
             OK
           </Button>,
