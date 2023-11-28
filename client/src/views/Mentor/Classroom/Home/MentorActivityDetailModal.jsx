@@ -215,6 +215,25 @@ const MentorActivityDetailModal = ({
     console.log(rubricData)
   };
 
+
+  // handling when the user clicks on the column title to change it
+  // const handleTitleChange = (e, colIndex) => {
+  //   const newRubricColumns = [...rubricColumns];
+  //   newRubricColumns[colIndex] = {
+  //     ...newRubricColumns[colIndex],
+  //     title: e.target.value,
+  //   };
+  //   setRubricColumns(newRubricColumns);
+  // };
+
+  // const renderTitle = (colIndex) => (
+  //   <Input
+  //     value={rubricColumns[colIndex].title}
+  //     onChange={(e) => handleTitleChange(e, colIndex)}
+  //     placeholder="Column Title"
+  //   />
+  // );
+
   return (
     <div id="mentoredit">
 
@@ -376,7 +395,7 @@ const MentorActivityDetailModal = ({
       dataSource={rubricData.map((_, index) => ({ key: index, ..._ }))}
       columns={[
         {
-          title: 'Row',
+          title: 'Description',
           dataIndex: 'row',
           fixed: 'left',
           width: 100,  // Set the width to the desired value
@@ -397,7 +416,20 @@ const MentorActivityDetailModal = ({
           ),
         },
         ...Array.from({ length: rubricColumns }).map((_, colIndex) => ({
-          title: `Column ${colIndex + 1}`,
+          title: (
+            <Input
+              value={rubricData[0][`col-${colIndex}`].title}
+              onChange={(e) =>
+                handleRubricChange(
+                  e.target.value,
+                  'title',
+                  0, // Assuming row index is 0 for column titles
+                  colIndex
+                )
+              }
+              placeholder={`Column ${colIndex + 1}`}
+            />
+          ),
           dataIndex: `col-${colIndex}`,
           width: 100,  // Set the width to the same value as 'Row'
           render: (_, record, rowIndex) => (
