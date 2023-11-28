@@ -312,7 +312,7 @@ export default function MentorCanvas({ activity, isSandbox, setActivity,  isMent
                   ? `${activity.lesson_module_name} - Activity ${activity.number}`
                   : activity.name
                   ? `Workspace: ${activity.name}`
-                  : 'New Workspace!'}
+                  : 'Student Submission Sandbox!'}
               </Col>
               <Col flex='auto'>
                 <Row align='middle' justify='end' id='description-container'>

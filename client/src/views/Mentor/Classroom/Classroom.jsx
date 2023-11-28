@@ -1,12 +1,13 @@
 import {React, useEffect} from 'react';
 import { Tabs } from 'antd';
 import './Classroom.less';
-
 import NavBar from '../../../components/NavBar/NavBar';
 import Roster from './Roster/Roster';
 import Home from './Home/Home';
 import SavedWorkSpaceTab from '../../../components/Tabs/SavedWorkspaceTab';
+import GradingSandbox from "../../../components/Tabs/GradingSandbox";
 import { useSearchParams, useParams } from 'react-router-dom';
+import WorkspaceTable from "../../../components/Tabs/WorkspaceTable";
 
 const { TabPane } = Tabs;
 
@@ -33,6 +34,7 @@ export default function Classroom({
         defaultActiveKey={tab ? tab : 'home'}
         onChange={(key) => setSearchParams({ tab: key })}
       >
+
         <TabPane tab='Home' key='home'>
           <Home
             classroomId={parseInt(id)}
@@ -51,6 +53,15 @@ export default function Classroom({
             classroomId={id}
           />
         </TabPane>
+        <TabPane tab='Grading Sandbox' key='grading sandbox'>
+            <GradingSandbox isSandbox={true}/>
+            <WorkspaceTable
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
+                classroomId={id}
+            />
+        </TabPane>
+
       </Tabs>
     </div>
   );
