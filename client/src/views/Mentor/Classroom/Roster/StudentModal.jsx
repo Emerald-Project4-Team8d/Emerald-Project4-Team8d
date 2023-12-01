@@ -40,8 +40,7 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
             )}>
               Submissions
             </Button>,
-
-
+            
           <Button key='ok' type='primary' onClick={handleOk}>
             OK
           </Button>,
