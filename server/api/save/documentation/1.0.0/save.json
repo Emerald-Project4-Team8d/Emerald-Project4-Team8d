@@ -637,6 +637,24 @@
               "activity_template": {
                 "type": "string"
               },
+              "CompilePoints": {
+                "type": "string"
+              },
+              "TimePoints": {
+                "type": "string"
+              },
+              "ReadabilityPoints": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "string"
+              },
+              "rubric": {
+                "type": "string"
+              },
+              "ManualGrading": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },

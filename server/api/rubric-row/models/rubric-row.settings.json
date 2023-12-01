@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rubric_rows",
+  "info": {
+    "name": "Rubric Row"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "CategoryName": {
+      "type": "string"
+    },
+    "PossiblePoints": {
+      "type": "integer"
+    },
+    "rubric_entries": {
+      "collection": "rubric-entry"
+    },
+    "selected_rubric_entry": {
+      "model": "rubric-entry"
+    }
+  }
+}

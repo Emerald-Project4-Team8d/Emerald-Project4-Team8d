@@ -46,6 +46,25 @@
     "activity_template": {
       "type": "text",
       "required": false
+    },
+    "CompilePoints": {
+      "type": "string"
+    },
+    "TimePoints": {
+      "type": "string"
+    },
+    "ReadabilityPoints": {
+      "type": "string"
+    },
+    "TotalPoints": {
+      "type": "string"
+    },
+    "rubric": {
+      "model": "rubric"
+    },
+    "ManualGrading": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

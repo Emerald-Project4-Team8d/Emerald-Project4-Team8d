@@ -886,6 +886,47 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
+            "type": "string"
+          },
+          "rubric": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "TotalPoints": {
+                "type": "integer"
+              },
+              "rubric_rows": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "ManualGrading": {
+            "type": "boolean",
+            "default": true
           }
         }
       },
@@ -930,6 +971,25 @@
           },
           "activity_template": {
             "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
+            "type": "string"
+          },
+          "rubric": {
+            "type": "string"
+          },
+          "ManualGrading": {
+            "type": "boolean",
+            "default": true
           },
           "created_by": {
             "type": "string"
