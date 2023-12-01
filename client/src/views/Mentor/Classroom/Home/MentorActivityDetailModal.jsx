@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal, Table } from "antd"
+import { Button, Form, Input, message, Modal } from "antd"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
@@ -27,7 +27,6 @@ const generateEmptyRubricData = (rows, columns) => {
   return data;
 };
 
-
 const MentorActivityDetailModal = ({
   learningStandard,
   selectActivity,
@@ -51,6 +50,9 @@ const MentorActivityDetailModal = ({
   const [ReadabilityPoints, setReadabilityPoints] = useState("")
   const [TimePoints, setTimePoints] = useState("")
   const [TotalPoints, setTotalPoints] = useState("")
+  const [Day, setDay] = useState("")
+  const [Time, setTime] = useState("")
+  const [DueDate, setDueDate] = useState("")
   const [ManualGrading, setManualGrading] = useState(false)
 
   const [rubricRows, setRubricRows] = useState(1);
@@ -58,6 +60,7 @@ const MentorActivityDetailModal = ({
   const [rubricData, setRubricData] = useState(generateEmptyRubricData(1,1));
 
   const navigate = useNavigate()
+
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {
@@ -78,6 +81,8 @@ const MentorActivityDetailModal = ({
       setTimePoints(response.data.TimePoints)
       setTotalPoints(response.data.TotalPoints)
       setManualGrading(response.data.ManualGrading)
+      setDay(response.data.Date)
+      setTime(response.data.Time)
 
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
@@ -154,6 +159,9 @@ const MentorActivityDetailModal = ({
       TotalPoints,
       ManualGrading,
       link,
+      Day,
+      Time,
+      DueDate,
       scienceComponents,
       makingComponents,
       computationComponents
@@ -333,6 +341,39 @@ const MentorActivityDetailModal = ({
             />
           </Form.Item>
           <Form.Item>
+            <h3 id="subtitle">Due Date</h3>
+          </Form.Item>
+          <Form.Item id="form-label" label="Day Assignment is Due (Enter in yyyy/mm/dd format">
+            <Input.TextArea
+              onChange={e => setDay(e.target.value)}
+              value={Day}
+              required
+              placeholder="Day Due"
+            ></Input.TextArea>
+          </Form.Item>
+
+          <Form.Item id="form-label" label="Time Assignment is Due (11:59pm needs to be entered 23:59:00">
+            <Input.TextArea
+              onChange={e => setTime(e.target.value)}
+              value={Time}
+              required
+              placeholder="Time Due"
+
+            ></Input.TextArea>
+          </Form.Item>
+
+          <Form.Item id="form-label" label="Due Date and Time">
+            <Input.TextArea
+              onChange={e => setDueDate(e.target.value)}
+              value={Day + ' ' + Time}
+
+              required
+
+            ></Input.TextArea>
+          </Form.Item>
+
+
+          <Form.Item>
             <h3 id="subtitle">Rubric</h3>
           </Form.Item>
           <Form.Item id="form-label" label="Compile">
@@ -372,7 +413,7 @@ const MentorActivityDetailModal = ({
 
             ></Input.TextArea>
           </Form.Item>
-          
+
 
           <Form.Item id="form-label" label="Rubric Rows">
             <Input
@@ -388,7 +429,7 @@ const MentorActivityDetailModal = ({
               onChange={(e) => handleColumnsChange(parseInt(e.target.value, 10))}
             />
           </Form.Item>
-          
+
           <Form.Item id="form-label" label="Rubric">
   {rubricRows > 0 && rubricColumns > 0 && (
     <Table
@@ -455,15 +496,6 @@ const MentorActivityDetailModal = ({
     />
   )}
 </Form.Item>
-      
-          <Form.Item id="form-label" label="Manual Grading">
-            <Input type="checkbox"
-              onChange={e => setManualGrading(e.target.checked)}
-              checked={ManualGrading}
-
-            ></Input>
-          </Form.Item>
-      
 
           <Form.Item id="form-label" label="Manual Grading">
             <Input type="checkbox"
@@ -472,6 +504,18 @@ const MentorActivityDetailModal = ({
 
             ></Input>
           </Form.Item>
+
+
+
+{/*
+
+          <Form.Item id="form-label" label="Manual Grading">
+            <Input type="checkbox"
+              onChange={e => setManualGrading(e.target.checked)}
+              checked={ManualGrading}
+
+            ></Input>
+          </Form.Item> */}
 
           <h3 id="subtitle">Additional Information</h3>
           <Form.Item

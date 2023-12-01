@@ -9,6 +9,8 @@ import PlotterModal from '../modals/PlotterModal';
 import DisplayDiagramModal from '../modals/DisplayDiagramModal'
 import VersionHistoryModal from '../modals/VersionHistoryModal';
 import RubricModal from '../modals/RubricModal';
+import MentorActivityDetailModal from '../../../../../src/views/Mentor/Classroom/Home/MentorActivityDetailModal';
+import { getActivity } from '../../../../Utils/requests';
 
 import {
   connectToPort,
@@ -20,6 +22,22 @@ import PlotterLogo from '../Icons/PlotterLogo';
 import { useNavigate } from 'react-router-dom';
 
 let plotId = 1;
+
+async function fetchData(activity, setTurnInTime,setTurnInDate) {
+  try {
+    console.log(activity.id);
+    console.log("FFFF");
+    const response = await getActivity(activity.id);
+    const activityData = response.data;
+    setTurnInDate(response.data.Date);
+    setTurnInTime(response.data.Time);
+
+  } catch (error) {
+    console.error('Error fetching activity data:', error);
+    // Handle the error (e.g., show an error message to the user)
+  }
+}
+
 
 export default function StudentCanvas({ activity }) {
   const [hoverSave, setHoverSave] = useState(false);
@@ -38,6 +56,9 @@ export default function StudentCanvas({ activity }) {
   const [saves, setSaves] = useState({});
   const [lastSavedTime, setLastSavedTime] = useState(null);
   const [lastAutoSave, setLastAutoSave] = useState(null);
+  const [turnInDate, setTurnInDate] = useState('');
+  const [turnInTime, setTurnInTime] = useState('');
+  
 
   const [forceUpdate] = useReducer((x) => x + 1, 0);
   const navigate = useNavigate();
@@ -47,6 +68,8 @@ export default function StudentCanvas({ activity }) {
   const replayRef = useRef([]);
   const clicks = useRef(0);
 
+  fetchData(activity, setTurnInTime,setTurnInDate);
+  
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
       toolbox: document.getElementById('toolbox'),
@@ -54,8 +77,11 @@ export default function StudentCanvas({ activity }) {
     window.Blockly.addChangeListener(blocklyEvent);
   };
 
+
+  
   const loadSave = (selectedSave) => {
     try {
+      
       let toLoad = activity.template;
       if (selectedSave !== -1) {
         if (lastAutoSave && selectedSave === -2) {
@@ -301,8 +327,52 @@ export default function StudentCanvas({ activity }) {
       setShowPlotter(false);
     }
   };
+
+ 
+  console.log(turnInDate);
   const handleCompile = async () => {
-    window.alert("Submitted " + Date());
+  const today = new Date();
+
+const x = new Date(turnInDate);
+const time = turnInTime.split(":")
+let hours = parseInt(time[0], 10);
+let minutes = parseInt(time[1], 10);
+let seconds = parseInt(time[2], 10);
+if (hours < 10) hours = '0' + hours;
+if (minutes < 10) minutes = '0' + minutes;
+if (seconds < 10) seconds = '0' + seconds;
+
+x.setHours(hours);
+x.setMinutes(minutes);
+x.setSeconds(seconds); 
+const due = turnInDate + " @ " + hours + ":" + minutes + ":" + seconds;
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+hours = today.getHours();
+minutes = today.getMinutes();
+seconds = today.getSeconds();
+
+if (hours < 10) hours = '0' + hours;
+if (minutes < 10) minutes = '0' + minutes;
+if (seconds < 10) seconds = '0' + seconds;
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+
+
+
+const formattedToday = yyyy + '/' + mm + '/' + dd + " @ " + hours + ":" + minutes + ":" + seconds;
+
+
+if(x < today){
+  window.alert("This assignment has been submitted late. Submitted at: " + formattedToday +" but was due at: " + due );
+}
+if(x > today){
+    window.alert("Submitted " + formattedToday);
+}
+
     if (showConsole || showPlotter) {
       message.warning(
         'Close Serial Monitor and Serial Plotter before uploading your code'

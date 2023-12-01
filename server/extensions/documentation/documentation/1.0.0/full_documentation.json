@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/27/2023 10:55:19 PM"
+    "x-generation-date": "11/28/2023 1:35:21 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -13433,6 +13433,9 @@
           "activity_template": {
             "type": "string"
           },
+          "DueDate": {
+            "type": "string"
+          },
           "CompilePoints": {
             "type": "string"
           },
@@ -13473,6 +13476,12 @@
           "ManualGrading": {
             "type": "boolean",
             "default": true
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
           }
         }
       },
@@ -13518,6 +13527,9 @@
           "activity_template": {
             "type": "string"
           },
+          "DueDate": {
+            "type": "string"
+          },
           "CompilePoints": {
             "type": "string"
           },
@@ -13536,6 +13548,12 @@
           "ManualGrading": {
             "type": "boolean",
             "default": true
+          },
+          "Date": {
+            "type": "string"
+          },
+          "Time": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
@@ -14316,6 +14334,9 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "DueDate": {
+                  "type": "string"
+                },
                 "CompilePoints": {
                   "type": "string"
                 },
@@ -14333,6 +14354,12 @@
                 },
                 "ManualGrading": {
                   "type": "boolean"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -14470,6 +14497,9 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "DueDate": {
+                  "type": "string"
+                },
                 "CompilePoints": {
                   "type": "string"
                 },
@@ -14487,6 +14517,12 @@
                 },
                 "ManualGrading": {
                   "type": "boolean"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -15036,6 +15072,9 @@
               "activity_template": {
                 "type": "string"
               },
+              "DueDate": {
+                "type": "string"
+              },
               "CompilePoints": {
                 "type": "string"
               },
@@ -15053,6 +15092,12 @@
               },
               "ManualGrading": {
                 "type": "boolean"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "Time": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -16137,6 +16182,9 @@
               "activity_template": {
                 "type": "string"
               },
+              "DueDate": {
+                "type": "string"
+              },
               "CompilePoints": {
                 "type": "string"
               },
@@ -16154,6 +16202,12 @@
               },
               "ManualGrading": {
                 "type": "boolean"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "Time": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"

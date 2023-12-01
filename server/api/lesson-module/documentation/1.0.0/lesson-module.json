@@ -594,6 +594,9 @@
                 "activity_template": {
                   "type": "string"
                 },
+                "DueDate": {
+                  "type": "string"
+                },
                 "CompilePoints": {
                   "type": "string"
                 },
@@ -611,6 +614,12 @@
                 },
                 "ManualGrading": {
                   "type": "boolean"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"

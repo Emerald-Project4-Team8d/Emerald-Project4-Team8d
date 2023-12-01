@@ -887,6 +887,27 @@
           "activity_template": {
             "type": "string"
           },
+          "Date":{
+            "type": "string"
+          },
+          "Time":{
+            "type": "string"
+          },
+          "DueDate":{
+            "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
+            "type": "string"
+          },
           "CompilePoints": {
             "type": "string"
           },
@@ -970,6 +991,21 @@
             }
           },
           "activity_template": {
+            "type": "string"
+          },
+          "DueDate":{
+            "type": "string"
+          },
+          "CompilePoints": {
+            "type": "string"
+          },
+          "TimePoints": {
+            "type": "string"
+          },
+          "ReadabilityPoints": {
+            "type": "string"
+          },
+          "TotalPoints": {
             "type": "string"
           },
           "CompilePoints": {

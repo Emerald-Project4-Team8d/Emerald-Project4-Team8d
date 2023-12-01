@@ -24,6 +24,9 @@ module.exports = {
       images,
       StandardS,
       link,
+      Date,
+      Time,
+      dueDate,
       CompilePoints,
       TimePoints,
       TotalPoints,
@@ -115,7 +118,7 @@ module.exports = {
 
     const updatedActivity = await strapi.services.activity.update(
       { id },
-      { description, images, StandardS, link, CompilePoints, TimePoints, TotalPoints, ReadabilityPoints, ManualGrading, learning_components: activityComponents }
+      { description, images, StandardS, link, Date, Time, dueDate, CompilePoints, TimePoints, TotalPoints, ReadabilityPoints, ManualGrading, learning_components: activityComponents }
     );
     return sanitizeEntity(updatedActivity, { model: strapi.models.activity });
   },
