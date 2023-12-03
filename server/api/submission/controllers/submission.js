@@ -45,7 +45,6 @@ module.exports = {
      * @param {String} sketch
      * @param {Integer} activity
      * @param {String} workspace 
-     * @param {Rubric} rubric 
      * 
      * @return {Submission}
      */
@@ -59,14 +58,14 @@ module.exports = {
 
         // ensure the request has the right number of params
         const params = Object.keys(ctx.request.body).length
-        if (params !== 5) return ctx.badRequest(
+        if (params !== 4) return ctx.badRequest(
             'Invalid number of params!',
             { id: 'Submission.create.body.invalid', error: 'ValidationError' }
         )
 
         // validate the request
-        const { activity: activityId, workspace, board, sketch, rubric } = ctx.request.body
-        if (!strapi.services.validator.isInt(activityId) || !workspace || !board || !sketch || !rubric) return ctx.badRequest(
+        const { activity: activityId, workspace, board, sketch } = ctx.request.body
+        if (!strapi.services.validator.isInt(activityId) || !workspace || !board || !sketch ) return ctx.badRequest(
             'A activity, workspace, board, and sketch must be provided!',
             { id: 'Submission.create.body.invalid', error: 'ValidationError' }
         )
@@ -80,16 +79,6 @@ module.exports = {
 
         // get the current session
         const { session } = ctx.state.user
-        rubric = makeRequest({
-            method: POST,
-            path: `http://localhost:1337/api/rubrics`,
-            data: {
-              TotalPoints: parseInt(20),
-              rubric_rows: [],
-            },
-            auth: true,
-            error: 'Fail to create new rubric.',
-          })
 
         // construct submission
         return await strapi.services.submission.startJob({
@@ -97,8 +86,7 @@ module.exports = {
             session,
             workspace,
             board,
-            sketch,
-            rubric
+            sketch
         })
     },
 }

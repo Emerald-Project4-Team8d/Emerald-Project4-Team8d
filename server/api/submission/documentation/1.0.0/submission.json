@@ -648,33 +648,6 @@
               "activity_template": {
                 "type": "string"
               },
-              "DueDate": {
-                "type": "string"
-              },
-              "CompilePoints": {
-                "type": "string"
-              },
-              "TimePoints": {
-                "type": "string"
-              },
-              "ReadabilityPoints": {
-                "type": "string"
-              },
-              "TotalPoints": {
-                "type": "string"
-              },
-              "rubric": {
-                "type": "string"
-              },
-              "ManualGrading": {
-                "type": "boolean"
-              },
-              "Date": {
-                "type": "string"
-              },
-              "Time": {
-                "type": "string"
-              },
               "created_by": {
                 "type": "string"
               },
@@ -685,35 +658,6 @@
           },
           "job_id": {
             "type": "integer"
-          },
-          "submission_time": {
-            "type": "string",
-            "format": "date"
-          },
-          "rubric": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "TotalPoints": {
-                "type": "integer"
-              },
-              "rubric_rows": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
           }
         }
       },
@@ -763,13 +707,6 @@
           },
           "job_id": {
             "type": "integer"
-          },
-          "submission_time": {
-            "type": "string",
-            "format": "date"
-          },
-          "rubric": {
-            "type": "string"
           },
           "created_by": {
             "type": "string"

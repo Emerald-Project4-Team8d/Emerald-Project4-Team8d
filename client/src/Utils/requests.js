@@ -278,7 +278,7 @@ export const getSave = async (id) =>
     error: 'Save could not be retrieved.',
   });
 
-export const createSubmission = async (id, workspace, sketch, path, isAuth, rubric) =>
+export const createSubmission = async (id, workspace, sketch, path, isAuth) =>
   makeRequest({
     method: POST,
     path: `${server}${path}`,
@@ -287,7 +287,6 @@ export const createSubmission = async (id, workspace, sketch, path, isAuth, rubr
       workspace: workspace,
       board: 'arduino:avr:uno',
       sketch: sketch,
-      rubric: rubric,
     },
     auth: isAuth,
     error: 'Failed to create submission.',
@@ -377,10 +376,6 @@ export const createLessonModule = async (
   number,
   unit,
   standards,
-  CompilePoints,
-  TimePoints,
-  ReadabilityPoints,
-  TotalPoints,
   link
 ) =>
   makeRequest({
@@ -392,10 +387,6 @@ export const createLessonModule = async (
       number,
       unit,
       standards,
-      CompilePoints,
-      TimePoints,
-      ReadabilityPoints,
-      TotalPoints,
       link,
     },
     auth: true,
@@ -460,24 +451,16 @@ export const updateLessonModule = async (
   name,
   expectations,
   standards,
-  link,
-  CompilePoints,
-  TimePoints,
-  TotalPoints,
-  ReadabilityPoints
+  link
 ) =>
   makeRequest({
     method: PUT,
     path: `${server}/lesson-modules/${id}`,
     data: {
-      name: name,
-      standards: standards,
-      expectations: expectations,
-      link: link,
-      CompilePoints: CompilePoints,
-      TimePoints: TimePoints,
-      TotalPoints: TotalPoints,
-      ReadabilityPoints: ReadabilityPoints
+      name,
+      standards,
+      expectations,
+      link,
     },
     auth: true,
     error: 'Failed to update unit',
@@ -490,15 +473,7 @@ export const updateActivityDetails = async (
   // activity_template,
   StandardS,
   images,
-  CompilePoints,
-  TimePoints,
-  ReadabilityPoints,
-  TotalPoints,
-  ManualGrading,
   link,
-  Date,
-  Time,
-  dueDate,
   scienceComponents,
   makingComponents,
   computationComponents
@@ -512,15 +487,7 @@ export const updateActivityDetails = async (
       // activity_template,
       StandardS,
       images,
-      CompilePoints,
-      TimePoints,
-      ReadabilityPoints,
-      TotalPoints,
-      ManualGrading,
       link,
-      Date,
-      Time, 
-      dueDate,
       scienceComponents,
       makingComponents,
       computationComponents,
@@ -704,16 +671,4 @@ export const getClassroomWorkspace = async (id) =>
     path: `${server}/classroom/workspaces/${id}`,
     auth: true,
     error: 'Unable to retrive classroom workspaces',
-  });
-
-export const createRubric = async (TotalPoints, rubric_rows) =>
-  makeRequest({
-    method: POST,
-    path: `${server}/rubrics`,
-    data: {
-      TotalPoints: parseInt(TotalPoints, 10),
-      rubric_rows: rubric_rows,
-    },
-    auth: true,
-    error: 'Fail to create new rubric.',
   });

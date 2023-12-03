@@ -673,12 +673,6 @@
                 "job_id": {
                   "type": "integer"
                 },
-                "submission_time": {
-                  "type": "string"
-                },
-                "rubric": {
-                  "type": "string"
-                },
                 "created_by": {
                   "type": "string"
                 },

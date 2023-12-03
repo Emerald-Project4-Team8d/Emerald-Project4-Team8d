@@ -10,22 +10,10 @@ import {
 } from "../../../../Utils/requests"
 import "../../../ContentCreator/ActivityEditor/ActivityEditor.less"
 import ActivityComponentTags from "../../../ContentCreator/ActivityEditor/components/ActivityComponentTags"
-import RubricModal from "../../../../components/ActivityPanels/BlocklyCanvasPanel/modals/RubricModal"
 
 const SCIENCE = 1
 const MAKING = 2
 const COMPUTATION = 3
-
-const generateEmptyRubricData = (rows, columns) => {
-  const data = Array.from({ length: rows }).map((_, rowIndex) => {
-    const row = { key: rowIndex, row: rowIndex + 1 };
-    for (let j = 0; j < columns; j++) {
-      row[`col-${j}`] = { points: '' };
-    }
-    return row;
-  });
-  return data;
-};
 
 const MentorActivityDetailModal = ({
   learningStandard,
@@ -46,21 +34,7 @@ const MentorActivityDetailModal = ({
   const [activityDetailsVisible, setActivityDetailsVisible] = useState(false)
   const [linkError, setLinkError] = useState(false)
   const [submitButton, setSubmitButton] = useState(0)
-  const [CompilePoints, setCompilePoints] = useState("")
-  const [ReadabilityPoints, setReadabilityPoints] = useState("")
-  const [TimePoints, setTimePoints] = useState("")
-  const [TotalPoints, setTotalPoints] = useState("")
-  const [Day, setDay] = useState("")
-  const [Time, setTime] = useState("")
-  const [DueDate, setDueDate] = useState("")
-  const [ManualGrading, setManualGrading] = useState(false)
-
-  const [rubricRows, setRubricRows] = useState(1);
-  const [rubricColumns, setRubricColumns] = useState(1);
-  const [rubricData, setRubricData] = useState(generateEmptyRubricData(1,1));
-
   const navigate = useNavigate()
-
 
   useEffect(() => {
     const showActivityDetailsModal = async () => {
@@ -76,14 +50,6 @@ const MentorActivityDetailModal = ({
       setImages(response.data.images)
       setLink(response.data.link)
       setLinkError(false)
-      setCompilePoints(response.data.CompilePoints)
-      setReadabilityPoints(response.data.ReadabilityPoints)
-      setTimePoints(response.data.TimePoints)
-      setTotalPoints(response.data.TotalPoints)
-      setManualGrading(response.data.ManualGrading)
-      setDay(response.data.Date)
-      setTime(response.data.Time)
-
       const science = response.data.learning_components
         .filter(component => component.learning_component_type === SCIENCE)
         .map(element => {
@@ -153,15 +119,7 @@ const MentorActivityDetailModal = ({
       //template,
       StandardS,
       images,
-      CompilePoints,
-      TimePoints,
-      ReadabilityPoints,
-      TotalPoints,
-      ManualGrading,
       link,
-      Day,
-      Time,
-      DueDate,
       scienceComponents,
       makingComponents,
       computationComponents
@@ -189,120 +147,67 @@ const MentorActivityDetailModal = ({
   const showModal = () => {
     setVisible(true)
     //setOpen(true)
-  };
-
-  const handleRowsChange = (increment) => {
-    increment = increment - rubricRows
-    if (increment < 0 && rubricRows == 1) {
-      increment = 0
-    }
-    setRubricRows((prevRows) => Math.max(1, prevRows + increment));
-    setRubricData(generateEmptyRubricData(rubricRows + increment, rubricColumns));
-    console.log(rubricData)
-  };
-  
-  const handleColumnsChange = (increment) => {
-    increment = increment - rubricColumns
-    if (increment < 0 && rubricColumns == 1) {
-      increment = 0
-    }
-    setRubricColumns((prevColumns) => Math.max(1, prevColumns + increment));
-    setRubricData(generateEmptyRubricData(rubricRows, rubricColumns + increment));
-    console.log(rubricData)
-  };
-  
-
-  const handleRubricChange = (value, field, rowIndex, colIndex) => {
-    setRubricData(prevData => {
-      const updatedData = [...prevData];
-      const updatedRow = { ...updatedData[rowIndex] };
-      updatedRow[`col-${colIndex}`] = { ...updatedRow[`col-${colIndex}`], [field]: value };
-      updatedData[rowIndex] = updatedRow;
-      return updatedData;
-    });
-    console.log(rubricData)
-  };
-
-
-  // handling when the user clicks on the column title to change it
-  // const handleTitleChange = (e, colIndex) => {
-  //   const newRubricColumns = [...rubricColumns];
-  //   newRubricColumns[colIndex] = {
-  //     ...newRubricColumns[colIndex],
-  //     title: e.target.value,
-  //   };
-  //   setRubricColumns(newRubricColumns);
-  // };
-
-  // const renderTitle = (colIndex) => (
-  //   <Input
-  //     value={rubricColumns[colIndex].title}
-  //     onChange={(e) => handleTitleChange(e, colIndex)}
-  //     placeholder="Column Title"
-  //   />
-  // );
-
+};
   return (
     <div id="mentoredit">
-
-      <Button id="view-activity-button"
-        onClick={showModal} style={{ width: '40px', marginRight: "auto" }} >
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
-        >
-          <g
+    <Button id="view-activity-button"
+    onClick={showModal} style={{width: '40px',marginRight: "auto"}} >
+<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
+>
+<g
             id="link"
             stroke="none"
             fill="none"
           >
-          </g>
-          <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" /></svg>
+            </g>
+            <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
       </Button>
-      <Modal
-        title={`${learningStandard.name} - Activity ${selectActivity.number} - ID ${selectActivity.id}`}
-        visible={visible}
-        onCancel={() => setVisible(false)}
-        footer={null}
-        width="45vw"
+    <Modal
+      title={`${learningStandard.name} - Activity ${selectActivity.number} - ID ${selectActivity.id}`}
+      visible={visible}
+      onCancel={() => setVisible(false)}
+      footer={null}
+      width="45vw"
+    >
+      <Form
+        id="activity-detail-editor"
+        layout="horizontal"
+        size="default"
+        labelCol={{
+          span: 6,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        onFinish={handleSave}
       >
-        <Form
-          id="activity-detail-editor"
-          layout="horizontal"
-          size="default"
-          labelCol={{
-            span: 6,
-          }}
-          wrapperCol={{
-            span: 14,
-          }}
-          onFinish={handleSave}
-        >
-          <Form.Item id="form-label" label="Description">
-            <Input.TextArea
-              onChange={e => setDescription(e.target.value)}
-              value={description}
-              required
-              placeholder="Enter description"
-            ></Input.TextArea>
-          </Form.Item>
+        <Form.Item id="form-label" label="Description">
+          <Input.TextArea
+            onChange={e => setDescription(e.target.value)}
+            value={description}
+            required
+            placeholder="Enter description"
+          ></Input.TextArea>
+        </Form.Item>
 
-          <Form.Item id="form-label" label="StandardS">
-            <Input
-              onChange={e => setStandardS(e.target.value)}
-              value={StandardS}
-              className="input"
-              required
-              placeholder="Enter standards"
-            ></Input>
-          </Form.Item>
-          <Form.Item id="form-label" label="Table Chart">
-            <Input.TextArea
-              onChange={e => setImages(e.target.value)}
-              value={images}
-              className="input"
-              placeholder="Enter image URL"
-            ></Input.TextArea>
-          </Form.Item>
-          {/* <Form.Item id="form-label" label="Student Template">
+        <Form.Item id="form-label" label="StandardS">
+          <Input
+            onChange={e => setStandardS(e.target.value)}
+            value={StandardS}
+            className="input"
+            required
+            placeholder="Enter standards"
+          ></Input>
+        </Form.Item>
+        <Form.Item id="form-label" label="Table Chart">
+          <Input.TextArea
+            onChange={e => setImages(e.target.value)}
+            value={images}
+            className="input"
+            placeholder="Enter image URL"
+          ></Input.TextArea>
+        </Form.Item>
+        {/* <Form.Item id="form-label" label="Student Template">
           <Input.TextArea
             onChange={e => setTemplate(e.target.value)}
             value={template}
@@ -318,256 +223,79 @@ const MentorActivityDetailModal = ({
             placeholder="Enter mentor code template"
           ></Input.TextArea>
         </Form.Item> */}
-          <h3 id="subtitle">Lesson Materials</h3>
-          <Form.Item id="form-label" label="Classroom Materials">
-            <ActivityComponentTags
-              components={scienceComponents}
-              setComponents={setScienceComponents}
-              colorOffset={1}
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Student Materials">
-            <ActivityComponentTags
-              components={makingComponents}
-              setComponents={setMakingComponents}
-              colorOffset={4}
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Arduino Components">
-            <ActivityComponentTags
-              components={computationComponents}
-              setComponents={setComputationComponents}
-              colorOffset={7}
-            />
-          </Form.Item>
-          <Form.Item>
-            <h3 id="subtitle">Due Date</h3>
-          </Form.Item>
-          <Form.Item id="form-label" label="Day Assignment is Due (Enter in yyyy/mm/dd format">
-            <Input.TextArea
-              onChange={e => setDay(e.target.value)}
-              value={Day}
-              required
-              placeholder="Day Due"
-            ></Input.TextArea>
-          </Form.Item>
-
-          <Form.Item id="form-label" label="Time Assignment is Due (11:59pm needs to be entered 23:59:00">
-            <Input.TextArea
-              onChange={e => setTime(e.target.value)}
-              value={Time}
-              required
-              placeholder="Time Due"
-
-            ></Input.TextArea>
-          </Form.Item>
-
-          <Form.Item id="form-label" label="Due Date and Time">
-            <Input.TextArea
-              onChange={e => setDueDate(e.target.value)}
-              value={Day + ' ' + Time}
-
-              required
-
-            ></Input.TextArea>
-          </Form.Item>
-
-
-          <Form.Item>
-            <h3 id="subtitle">Rubric</h3>
-          </Form.Item>
-          <Form.Item id="form-label" label="Compile">
-            <Input.TextArea
-              onChange={e => setCompilePoints(e.target.value)}
-              value={CompilePoints}
-              required
-              placeholder="Total points for successful compile"
-
-            ></Input.TextArea>
-          </Form.Item>
-          <Form.Item id="form-label" label="Submission Time">
-            <Input.TextArea
-              onChange={e => setTimePoints(e.target.value)}
-              value={TimePoints}
-              required
-              placeholder="Total points for successful compile"
-
-            ></Input.TextArea>
-          </Form.Item>
-          <Form.Item id="form-label" label="Readability">
-            <Input.TextArea
-              onChange={e => setReadabilityPoints(e.target.value)}
-              value={ReadabilityPoints}
-              required
-              placeholder="Total points for successful compile"
-
-            ></Input.TextArea>
-          </Form.Item>
-          <Form.Item id="form-label" label="Total">
-            <Input.TextArea
-              onChange={e => setTotalPoints(e.target.value)}
-              value={((parseInt(CompilePoints) || 0) + (parseInt(TimePoints) || 0) + (parseInt(ReadabilityPoints) || 0)).toString()}
-
-              required
-              placeholder="Total points for successful compile"
-
-            ></Input.TextArea>
-          </Form.Item>
-
-
-          <Form.Item id="form-label" label="Rubric Rows">
-            <Input
-              type="number"
-              value={rubricRows}
-              onChange={(e) => handleRowsChange(parseInt(e.target.value, 10))}
-            />
-          </Form.Item>
-          <Form.Item id="form-label" label="Rubric Columns">
-            <Input
-              type="number"
-              value={rubricColumns}
-              onChange={(e) => handleColumnsChange(parseInt(e.target.value, 10))}
-            />
-          </Form.Item>
-
-          <Form.Item id="form-label" label="Rubric">
-  {rubricRows > 0 && rubricColumns > 0 && (
-    <Table
-      dataSource={rubricData.map((_, index) => ({ key: index, ..._ }))}
-      columns={[
-        {
-          title: 'Description',
-          dataIndex: 'row',
-          fixed: 'left',
-          width: 100,  // Set the width to the desired value
-          render: (_, record, rowIndex) => (
-            <Input
-              value={record[`col-0`].points}
-              placeholder="Points"
-              style={{ height: '50px' }}  // Set the height to the desired value
-              onChange={(e) =>
-                handleRubricChange(
-                  e.target.value,
-                  'points',
-                  rowIndex,
-                  0  // Use 0 for the Row
-                )
-              }
-            />
-          ),
-        },
-        ...Array.from({ length: rubricColumns }).map((_, colIndex) => ({
-          title: (
-            <Input
-              value={rubricData[0][`col-${colIndex}`].title}
-              onChange={(e) =>
-                handleRubricChange(
-                  e.target.value,
-                  'title',
-                  0, // Assuming row index is 0 for column titles
-                  colIndex
-                )
-              }
-              placeholder={`Column ${colIndex + 1}`}
-            />
-          ),
-          dataIndex: `col-${colIndex}`,
-          width: 100,  // Set the width to the same value as 'Row'
-          render: (_, record, rowIndex) => (
-            <Input
-              value={record[`col-${colIndex}`].points}
-              onChange={(e) =>
-                handleRubricChange(
-                  e.target.value,
-                  'points',
-                  rowIndex,
-                  colIndex
-                )
-              }
-              placeholder="Points"
-            />
-          ),
-        })),
-      ]}
-      pagination={false}
-      bordered
-      size="small"
-      scroll={{ x: 'max-content' }}
-    />
-  )}
-</Form.Item>
-
-          <Form.Item id="form-label" label="Manual Grading">
-            <Input type="checkbox"
-              onChange={e => setManualGrading(e.target.checked)}
-              checked={ManualGrading}
-
-            ></Input>
-          </Form.Item>
-
-
-
-{/*
-
-          <Form.Item id="form-label" label="Manual Grading">
-            <Input type="checkbox"
-              onChange={e => setManualGrading(e.target.checked)}
-              checked={ManualGrading}
-
-            ></Input>
-          </Form.Item> */}
-
-          <h3 id="subtitle">Additional Information</h3>
-          <Form.Item
-            id="form-label"
-            label="Link to Additional Resources (Optional)"
-          >
-            <Input
-              onChange={e => {
-                setLink(e.target.value)
-                setLinkError(false)
-              }}
-              className="input"
-              value={link}
-              style={linkError ? { backgroundColor: "#FFCCCC" } : {}}
-              placeholder="Enter a link"
-            ></Input>
-          </Form.Item>
-          <Form.Item
-            id="form-label"
-            wrapperCol={{
-              offset: 6,
-              span: 30,
+        <h3 id="subtitle">Lesson Materials</h3>
+        <Form.Item id="form-label" label="Classroom Materials">
+          <ActivityComponentTags
+            components={scienceComponents}
+            setComponents={setScienceComponents}
+            colorOffset={1}
+          />
+        </Form.Item>
+        <Form.Item id="form-label" label="Student Materials">
+          <ActivityComponentTags
+            components={makingComponents}
+            setComponents={setMakingComponents}
+            colorOffset={4}
+          />
+        </Form.Item>
+        <Form.Item id="form-label" label="Arduino Components">
+          <ActivityComponentTags
+            components={computationComponents}
+            setComponents={setComputationComponents}
+            colorOffset={7}
+          />
+        </Form.Item>
+        <h3 id="subtitle">Additional Information</h3>
+        <Form.Item
+          id="form-label"
+          label="Link to Additional Resources (Optional)"
+        >
+          <Input
+            onChange={e => {
+              setLink(e.target.value)
+              setLinkError(false)
             }}
+            className="input"
+            value={link}
+            style={linkError ? { backgroundColor: "#FFCCCC" } : {}}
+            placeholder="Enter a link"
+          ></Input>
+        </Form.Item>
+        <Form.Item
+          id="form-label"
+          wrapperCol={{
+            offset: 6,
+            span: 30,
+          }}
+        >
+          <button id="save--set-activity-btn" onClick={() => setSubmitButton(1)}>
+            Edit Student Template
+          </button>
+          <button id="save--set-demo-btn" onClick={() => setSubmitButton(2)}>
+            Edit Demo Template
+            <br />
+            
+          </button>
+        </Form.Item>
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+          style={{ marginBottom: "0px" }}
+        >
+          <Button
+            onClick={() => setSubmitButton(0)}
+            type="primary"
+            htmlType="submit"
+            size="large"
+            className="content-creator-button"
           >
-            <button id="save--set-activity-btn" onClick={() => setSubmitButton(1)}>
-              Edit Student Template
-            </button>
-            <button id="save--set-demo-btn" onClick={() => setSubmitButton(2)}>
-              Edit Demo Template
-              <br />
-
-            </button>
-          </Form.Item>
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-            style={{ marginBottom: "0px" }}
-          >
-            <Button
-              onClick={() => setSubmitButton(0)}
-              type="primary"
-              htmlType="submit"
-              size="large"
-              className="content-creator-button"
-            >
-              Save
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+            Save
+          </Button>
+        </Form.Item>
+      </Form>
+    </Modal>
     </div>
   )
 }

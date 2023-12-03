@@ -2,13 +2,11 @@
   "kind": "collectionType",
   "collectionName": "submissions",
   "info": {
-    "name": "Submission",
-    "description": ""
+    "name": "Submission"
   },
   "options": {
     "increments": true,
-    "timestamps": true,
-    "draftAndPublish": false
+    "timestamps": true
   },
   "attributes": {
     "status": {
@@ -55,12 +53,6 @@
     },
     "job_id": {
       "type": "biginteger"
-    },
-    "submission_time": {
-      "type": "date"
-    },
-    "rubric": {
-      "model": "rubric"
     }
   }
 }
