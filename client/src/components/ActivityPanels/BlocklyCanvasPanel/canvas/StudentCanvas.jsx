@@ -332,7 +332,7 @@ export default function StudentCanvas({ activity }) {
   console.log(turnInDate);
   const handleCompile = async () => {
   const today = new Date();
-
+//This sets the dates
 const x = new Date(turnInDate);
 const time = turnInTime.split(":")
 let hours = parseInt(time[0], 10);
