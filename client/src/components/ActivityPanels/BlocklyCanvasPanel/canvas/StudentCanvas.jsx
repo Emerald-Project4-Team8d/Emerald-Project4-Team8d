@@ -16,6 +16,8 @@ import {
 import ArduinoLogo from '../Icons/ArduinoLogo';
 import PlotterLogo from '../Icons/PlotterLogo';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'antd'; //MY CODE
+
 
 let plotId = 1;
 
@@ -43,6 +45,9 @@ export default function StudentCanvas({ activity }) {
 
   const replayRef = useRef([]);
   const clicks = useRef(0);
+
+  const [compileStatus, setCompileStatus] = useState(null); //MY CODE
+
 
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
@@ -298,30 +303,57 @@ export default function StudentCanvas({ activity }) {
       setShowPlotter(false);
     }
   };
-  const handleCompile = async () => {
-    if (showConsole || showPlotter) {
-      message.warning(
-        'Close Serial Monitor and Serial Plotter before uploading your code'
-      );
-    } else {
-      if (typeof window['port'] === 'undefined') {
-        await connectToPort();
-      }
-      if (typeof window['port'] === 'undefined') {
-        message.error('Fail to select serial device');
-        return;
-      }
-      setCompileError('');
-      await compileArduinoCode(
-        workspaceRef.current,
-        setSelectedCompile,
-        setCompileError,
-        activity,
-        true
-      );
-      pushEvent('compile');
+
+
+  // MY CODE BELOW
+  const handleCompileButtonClick = async () => {
+    try {
+      await handleCompile();
+      setCompileStatus('Code compiled successfully! :D Works Beautifully');
+    } catch (error) {
+      setCompileStatus('Code Compilation Failed :( Please Check Again');
     }
   };
+
+  const handleCompile = async () => {
+    window.alert("Submitted " + Date()); //Shows only for submission on not compilation
+    if (showConsole || showPlotter) {
+      message.warning(
+          'Close Serial Monitor and Serial Plotter before uploading your code'
+      );
+    } else {
+      if (typeof window['port'] === 'undefined') { //For submission as well
+        await connectToPort();
+      }
+      /*if (typeof window['port'] === 'undefined') { //Got rid of this component because it interfered with compilatio
+        message.error('Fail to select serial device');
+        return;
+      }*/
+      if (showConsole || showPlotter) {
+        throw new Error(
+            'Close Serial Monitor and Serial Plotter before uploading your code' //Error for closing window correctly
+        );
+      } else {
+        if (typeof window['port'] === 'undefined') { //Needed to define port for compilation when connected to arduino component
+          await connectToPort();
+        }}
+      if (typeof window['port'] === 'undefined') { //Same thing for component serial code
+        throw new Error('Fail to select serial device');
+      }
+
+      setCompileError('');
+      await compileArduinoCode( //Deals with the actual function compiling blockly code
+          workspaceRef.current,
+          setSelectedCompile,
+          setCompileError,
+          activity,
+          true
+      );
+      pushEvent('compile'); // event handling for compilation
+    }
+  };
+
+  //MY CODE ABOVE
 
   const handleGoBack = () => {
     if (
@@ -463,6 +495,18 @@ export default function StudentCanvas({ activity }) {
                       id='action-btn-container'
                       className='flex space-around'
                     >
+
+
+                      <!-- MY CODE BELOW -->
+
+                      <Button onClick={handleCompileButtonClick} type="primary"> <!-- Passes compile function when button pressed -->
+                        Compile Code
+                      </Button>
+                      {compileStatus && <div>{compileStatus}</div>} <!-- will present sucessful or failed message once compiled-->
+
+                      <!-- MY CODE ABOVE -->
+
+
                       <ArduinoLogo
                         setHoverCompile={setHoverCompile}
                         handleCompile={handleCompile}

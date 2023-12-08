@@ -1,18 +1,20 @@
 import { Modal, Button } from 'antd';
 import React, { useState } from 'react';
-import {
-    getStudent, getSession, getActivity
-} from '../../../../Utils/requests';
+import { getStudent, getSession, getActivity } from '../../../../Utils/requests';
 import './Roster.less';
 
 export default function StudentModal({ linkBtn, student, getFormattedDate }) {
     const [visible, setVisible] = useState(false);
+    const [submissions, setSubmissions] = useState([]);
 
-    // MY CODE BELOW
 
-    const [submissions, setSubmissions] = useState([]); //Handles the submissions used in studentSubmissions component
+    //MY CODE BELOW
+
+    const [showSubmissions, setShowSubmissions] = useState(false); // State hook for showing submissions
+    const [codeModalVisible, setCodeModalVisible] = useState(false); //State hook for showing code
 
     //MY CODE ABOVE
+
 
     const showModal = () => {
         setVisible(true);
@@ -26,25 +28,48 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
         setVisible(false);
     };
 
+    const handleViewSubmission = async (id) => {
+        try {
+            const studentResponse = await getStudent(id);
+
+            const newSubmissions = await Promise.all(
+                studentResponse.data.sessions.map(async (session) => {
+                    const sessionResponse = await getSession(session.id);
+
+                    const submissionsWithNames = await Promise.all(
+                        sessionResponse.data.submissions.map(async (submission) => {
+                            const activityResponse = await getActivity(submission.activity);
+                            return {
+                                ...submission,
+                                name: activityResponse.data.lesson_module.name,
+                            };
+                        })
+                    );
+
+                    return submissionsWithNames;
+                })
+            );
+
+            // Flatten the array of arrays
+            const flattenedSubmissions = newSubmissions.flat();
+            setSubmissions(flattenedSubmissions);
+            setShowSubmissions(true);
+            console.log(submissions);
+        } catch (error) {
+            console.error('Error fetching student data:', error);
+            // Handle error, e.g., display an error message to the user
+        }
+    };
+
 
     //MY CODE BELOW
 
-    const studentSubmission = async (id) => {  //Asynchronous arrow function that handles the student submissions from strappi admin
-        const studentResponse = await getStudent(id); //retrieves student information via student id
-        const newSubmissions = await Promise.all(
-            studentResponse.data.sessions.map(async (session) => {
-                const studNames = await Promise.all(  //Fetches student session data and stores into studNames, essentially adds activity names
-                    (await getSession(session.id)).data.submissions.map(async (submission) => ({
-                        ...submission, //Creates a new object
-                        name: (await getActivity(submission.activity)).data.lesson_module.name, //Adds property name to the submission object
-                    }))
-                );
-                return studNames;
-            })
-        );
-        const flattenedSubmissions = newSubmissions.flat(); //Due to the use of array of arrays, makes into one readable array
-        setSubmissions(flattenedSubmissions);
-        console.log(submissions); //logs submission values into console to be used in the app
+    const handleCodeButtonClick = () => {
+        setCodeModalVisible(true); //If pressing code button then set to false allowing pop up window
+    };
+
+    const handleCodeModalCancel = () => {
+        setCodeModalVisible(false); //Opposite to hide pop up window
     };
 
     //MY CODE ABOVE
@@ -62,27 +87,21 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
                 footer={[
 
 
-                    //MY CODE BELOW
+                    // MY CODE BELOW
 
-                    <Button key='submissions' type='secondary' onClick={( //Create a button for submissions under view in roster
-                        studentSubmission(student.enrolled.id) //Handles button
-                    )}
-                            //Styling
-                            style={{ marginBottom: '10px' }} //Below is the name for the submission button
-                    > Submissions
+                    <Button key='load submission' type='secondary' onClick={() => handleViewSubmission(student.enrolled.id)}>
+                        Load Submissions
                     </Button>,
-
                     <Button key='ok' type='primary' onClick={handleOk}>
                         OK
                     </Button>,
-                    //New container below submission button that will display the actual submissions
-                    <div>
-                        {submissions && submissions.length > 0 ? ( //Checks variable exists
+                    <div style={{ marginTop: '20px' }}> <!-- Adds space on top stylistically so there is room between button and results -->
+                        {showSubmissions && submissions && submissions.length > 0 ? ( //Checks variable exists
                             submissions.map((submission, index) => ( //Checks submission array and creates element for each submission
                                 //Styling to make the submissions pop up look more pleasing and organized
                                 //Under the submission button contains submissions
                                 //Below is the Submission name followed but when submitted
-                                <div style={{ textAlign: 'left' }}>
+                                <div style={{ textAlign: 'left' }} key={index}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <div>
                                             Submission for "{submission.name}"
@@ -90,23 +109,23 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
                                         </div>
                                         <Button key='code' type='primary' //Code button used to get a pop up that shows the code submitted by student
                                                 onClick={() => {
-                                                    handleOk(); // Close the modal if needed
+                                                    handleCodeButtonClick(); <!-- Allows for window pop up handled in the hook -->
                                                 }}
                                                 style={{ fontSize: '12px', padding: '1px' }}>
-                                            Code
+                                            Code <!-- Code button -->
                                         </Button>
                                     </div>
                                 </div>
                             )) //Above is the name for the code button
                         ) : (
-                            <div className="pain">No Submissions</div> //If submission array is empty display no submission
+                            showSubmissions && <div className="pain">No Submissions</div> //Stylistically moves values to left side instead of right
                         )}
                     </div>
-
-                    //MY CODE ABOVE
-
-
                 ]}
+
+                //MY CODE ABOVE
+
+
             >
                 <div id='modal-student-card-header'>
                     <p id='animal'>{student.character}</p>
@@ -126,6 +145,17 @@ export default function StudentModal({ linkBtn, student, getFormattedDate }) {
                     </div>
                 </div>
             </Modal>
+
+            <Modal
+                visible={codeModalVisible}
+                onCancel={handleCodeModalCancel}
+                footer={null}
+            >
+                <div>
+                    <p>ITS NOT WORKING :(</p>
+                </div>
+            </Modal>
+
         </div>
     );
 }
