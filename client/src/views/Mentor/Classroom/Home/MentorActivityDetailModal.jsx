@@ -203,7 +203,7 @@ const MentorActivityDetailModal = ({
     console.log(rubricData)
   };
   
-
+// used when making any changes to the rubric, specifically for column title and rubric inputs 
   const handleRubricChange = (value, field, rowIndex, colIndex) => {
     setRubricData(prevData => {
       const updatedData = [...prevData];
@@ -215,24 +215,6 @@ const MentorActivityDetailModal = ({
     console.log(rubricData)
   };
 
-
-  // handling when the user clicks on the column title to change it
-  // const handleTitleChange = (e, colIndex) => {
-  //   const newRubricColumns = [...rubricColumns];
-  //   newRubricColumns[colIndex] = {
-  //     ...newRubricColumns[colIndex],
-  //     title: e.target.value,
-  //   };
-  //   setRubricColumns(newRubricColumns);
-  // };
-
-  // const renderTitle = (colIndex) => (
-  //   <Input
-  //     value={rubricColumns[colIndex].title}
-  //     onChange={(e) => handleTitleChange(e, colIndex)}
-  //     placeholder="Column Title"
-  //   />
-  // );
 
   return (
     <div id="mentoredit">
