@@ -141,6 +141,9 @@ const MentorActivityDetailModal = ({
         return
       }
     }
+
+    // SAVE BUTTON ^
+
     setLinkError(false)
     const res = await updateActivityDetails(
       selectActivity.id,
@@ -156,7 +159,7 @@ const MentorActivityDetailModal = ({
       link,
       scienceComponents,
       makingComponents,
-      computationComponents
+      computationComponents,
     )
     if (res.err) {
       message.error(res.err)

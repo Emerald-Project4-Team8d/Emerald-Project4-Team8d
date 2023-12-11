@@ -20,11 +20,13 @@ export default function LessonModuleCreator({
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [unit, setUnit] = useState("")
-  const [numOfActivityLevels, setNumOfActivityLevels] = useState("")
+  const [numOfActivityLevels, setNumOfActivityLevels] = useState("")``
   const [standards, setStandards] = useState("")
   const [link, setLink] = useState("")
   const [linkError, setLinkError] = useState(false)
   const [learningStandardObj, setLessonModuleObj] = useState("")
+
+  // rubric vals
 
   // Create point variables to store input values for rubric
   const [CompilePoints, setCompilePoints] = useState("")

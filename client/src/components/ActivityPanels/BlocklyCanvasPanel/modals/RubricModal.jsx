@@ -18,7 +18,7 @@ export default function RubricModal(props) {
     const [ReadabilityPoints, setReadabilityPoints] = useState("")
     const [TimePoints, setTimePoints] = useState("")
     const [TotalPoints, setTotalPoints] = useState("")
-
+ 
     const { image } = props
     const [hover, setHover] = useState(false)
 
@@ -36,10 +36,44 @@ export default function RubricModal(props) {
         setVisible(false)
     }
 
-    const handleOk = () => {
-        print("Saved")
-        setVisible(false)
+    const handleOk = async () => {
+        // Example structure, modify as needed
+        const rubricData = {
+            TotalPoints: parseInt(TotalPoints, 10) || 0,
+            rubric_rows: [
+                {
+                    CategoryName: 'Compile',
+                    PossiblePoints: parseInt(CompilePoints, 10) || 0,
+                    rubric_entries: [] // Add entries if needed
+                },
+                {
+                    CategoryName: 'Readability',
+                    PossiblePoints: parseInt(ReadabilityPoints, 10) || 0,
+                    rubric_entries: [] // Add entries if needed
+                },
+                {
+                    CategoryName: 'Submission Time',
+                    PossiblePoints: parseInt(TimePoints, 10) || 0,
+                    rubric_entries: [] // Add entries if needed
+                }
+            ]
+        };
+    
+        try {
+            const result = await createRubric(rubricData.TotalPoints, rubricData.rubric_rows);
+            console.log('Rubric created successfully', result);
+            // Handle success - maybe close modal, reset state, show success message, etc.
+            setVisible(false);
+            setCompilePoints("");
+            setReadabilityPoints("");
+            setTimePoints("");
+            setTotalPoints("");
+        } catch (error) {
+            console.error('Error creating rubric', error);
+            // Handle error - show error message to the user
+        }
     }
+    
 
     const links = new String(image)
     let items = links.split("\n").filter(item => item != "" || item != " ")
