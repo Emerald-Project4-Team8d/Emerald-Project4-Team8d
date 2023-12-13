@@ -39,6 +39,10 @@ We werent able to connect teacher view submission to the backend so we couldn't 
 
 We would work on creating a way to connect it to our grading system to automatically deduct points for late assignments
 
+### Credit
+
+The strapi documentation: https://docs.strapi.io/cloud/intro was a huge help for figuring out how strapi works and how we can create our own API on it. Besides that, we based a lot of our code on the existing code structures that were already there so that would be our other main source for this project.
+
 <br/>
 
 <br/>
