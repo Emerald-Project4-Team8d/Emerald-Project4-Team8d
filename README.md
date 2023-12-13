@@ -23,6 +23,8 @@ Created a page so that teachers are able to view individual student submissions.
 
 Submission times are now tied to each submission. The page will alert you whether or not you submit the assignment on time.
 
+No changes to running the project locally
+
 <br/>
 
 <br/>
