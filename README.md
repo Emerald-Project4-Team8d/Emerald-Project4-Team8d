@@ -25,6 +25,20 @@ Submission times are now tied to each submission. The page will alert you whethe
 
 No changes to running the project locally
 
+## Planned Changes
+
+### Rubric
+
+The main changes we had planned to work on was that we wanted the dynamic rubric system to connect to the backend system we had set up. Then each submission would copy that activities rubric and then the teacher could edit that to give them a grade. We would need both front and backend connections for all of these.
+
+### Teacher Submission Views
+
+We werent able to connect teacher view submission to the backend so we couldn't pull up the code so that is something that would've been a priority for the next sprint.
+
+### Submission Times
+
+We would work on creating a way to connect it to our grading system to automatically deduct points for late assignments
+
 <br/>
 
 <br/>
