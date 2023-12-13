@@ -9,6 +9,24 @@ Cloud-based programming interface
 
 <br/>
 
+## Changes that we made
+
+### Rubric
+
+We begun implementing a rubric system to both the front-end and back-end. We have a munual rubric creation with three categories: Submission Time, Compile Points and Readability. This is both configured with the front-end and the backend. We have a dynamic rubric that is fully configured on both individually, but are still working on getting both parts to communicate
+
+### Teacher Submission Views
+
+Created a page so that teachers are able to view individual student submissions.
+
+### Submission Times
+
+Submission times are now tied to each submission. The page will alert you whether or not you submit the assignment on time.
+
+<br/>
+
+<br/>
+
 ## Application
 
 ### `client` 
